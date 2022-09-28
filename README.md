@@ -1,2 +1,2 @@
 # javastudy
-Hey guyyyyys!
+Hey guys!
