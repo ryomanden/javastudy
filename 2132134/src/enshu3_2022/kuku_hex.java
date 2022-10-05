@@ -32,6 +32,7 @@ public class kuku_hex {
 	}
 
 	public static void printHex2(int v,int n) {
+		System.out.print("0x");
 		int x = 1, w;
 
 		for(int i = 1;i < n; i++)	x = x * 16;
@@ -47,12 +48,12 @@ public class kuku_hex {
 
 	public static void header(int y,int n) {
 		for(int i = 0;i < n;i++)	System.out.print(" "); //add space to head
-		System.out.print(" | ");
+		System.out.print("   | ");
 		
 		for(int i = 1; i < y; i++)	printHex2(i,n); //print NUM
 		System.out.println();
 		
-		for(int i = 0; i < (y * (n+1) + 1); i++)	System.out.print("-"); //print "-"
+		for(int i = 0; i < (y * (n+3) + 1); i++)	System.out.print("-"); //print "-"
 		System.out.println();
 	}
 }
