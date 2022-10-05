@@ -8,11 +8,11 @@ public class kuku_hex {
 		header(16,3);
 		while(y < 16) {
 			
-			printHex3(y,3); // print NUM
+			printHex2(y,3); // print NUM
 			System.out.print( "| ");
 			
 			for(int x = 1; x < 16; x++) { // <--- MAIN
-				printHex3(x * y,3);
+				printHex2(x * y,3);
 			}
 			System.out.println();
 			y++;
@@ -31,11 +31,12 @@ public class kuku_hex {
 		System.out.print(" ");
 	}
 
-	public static void printHex3(int v,int n) {
+	public static void printHex2(int v,int n) {
 		int x = 1, w;
 
 		for(int i = 1;i < n; i++)	x = x * 16;
 		for(int i = 0;i < n; i++) {
+			//System.out.println("[x = " + x + "]"); // DEBUG
 			w = v / x;
 			v = v % x;
 			printHex(w);
@@ -48,7 +49,7 @@ public class kuku_hex {
 		for(int i = 0;i < n;i++)	System.out.print(" "); //add space to head
 		System.out.print(" | ");
 		
-		for(int i = 1; i < y; i++)	printHex3(i,n); //print NUM
+		for(int i = 1; i < y; i++)	printHex2(i,n); //print NUM
 		System.out.println();
 		
 		for(int i = 0; i < (y * (n+1) + 1); i++)	System.out.print("-"); //print "-"
