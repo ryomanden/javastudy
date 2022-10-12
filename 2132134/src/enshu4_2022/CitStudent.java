@@ -5,4 +5,5 @@ public class CitStudent {
 	String name;
 	int year;
 	int grade;
+	int department;
 }
