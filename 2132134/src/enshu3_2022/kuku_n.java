@@ -37,7 +37,7 @@ public class kuku_n {
 		for(int i = 1;i < n; i++)	x = x * 16;
 		for(int i = 0;i < n; i++) {
 			//System.out.println("[x = " + x + "]"); // DEBUG
-			w = v / x;
+			w = v / x;5
 			v = v % x;
 			printHex(w);
 			x = x / 16;
