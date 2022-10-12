@@ -5,34 +5,40 @@ public class CitStudent2 {
 	String name;
 	int year;
 	int grade;
+	int department;
 	
+	int high, low, total ,num;
+	double ave;
+	
+	public CitStudent2() {
+		no = year = grade = department = high = low = total = num = 0;
+		ave = 0.0;
+		name = "";
+	}
+
+	CitStudent2(int p_no, String p_name){
+		no = p_no;
+		name = p_name;
+		year = grade = department = 0;
+	}
+	CitStudent2(int p_no, String p_name, int p_year){
+		no = p_no;
+		name = p_name;
+		year = p_year;
+		grade = department = 0;
+	}
+	
+	public void incNum() {
+		
+	}
 	public void setNo(int p_no) {
 		no = p_no;
 	}
-	public void setName(String p_name) {
-		name = p_name;
-	}
-	public void setYear(int p_year) {
-		year = p_year;
-	}
-	public void setGrade(int p_grade) {
-		grade = p_grade;
-	}
-	
+
 	public int getNo() {
 		return no;
 	}
-	public String getName() {
-		return name;
-	}
-	public int getYear() {
-		return year;
-	}
-	public int getGrade() {
-		return grade;
-	}
-	public String getDepartment() {
-		String dep[] =  {"情報工学科","情報ネットワーク学科"};
-		return dep[((no / 1000) % 10) - 1];
+	public int getNum() {
+		return no;
 	}
 }
