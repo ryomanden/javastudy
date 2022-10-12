@@ -13,6 +13,18 @@ public class SetGradeSample {
 	
 	public static void showGrade(CitStudent data) {
 		String dep[] =  {"情報工学科","情報ネットワーク学科"};
-		System.out.println("No: " +data.no+ " " +data.name+ " " +data.grade+ " " +dep[data.department-1]);
+		Character grade = 'D';
+		if(90 <= data.grade) {
+			grade = 'S';
+		}else if (80 <= data.grade) {
+			grade = 'A';
+		}else if (70 <= data.grade) {
+			grade = 'B';
+		}else if (60 <= data.grade) {
+			grade = 'C';
+		}else {
+			grade = 'D';
+		}
+		System.out.println("No: " +data.no+ " " +data.name+ " " +data.grade+ " " +dep[data.department-1]+ " " +grade);
 	}
 }
