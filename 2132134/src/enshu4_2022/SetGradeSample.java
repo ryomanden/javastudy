@@ -9,7 +9,7 @@ public class SetGradeSample {
 		kodai.grade = 80;
 		showGrade(kodai);
 	}
-	
+
 	public static void showGrade(CitStudent2 data) {
 		Character grade = 'D';
 		if(90 <= data.grade) {

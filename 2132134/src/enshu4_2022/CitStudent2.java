@@ -6,10 +6,10 @@ public class CitStudent2 {
 	int year;
 	int grade;
 	int department;
-	
-	int high, low, total ,num;
+
+	int high, low, total, num;
 	double ave;
-	
+
 	public CitStudent2() {
 		no = year = grade = department = high = low = total = num = 0;
 		ave = 0.0;
@@ -27,18 +27,29 @@ public class CitStudent2 {
 		year = p_year;
 		grade = department = 0;
 	}
-	
+
 	public void incNum() {
-		
+		num += 1;
 	}
+
+	public void addScore(int score) {	
+	}
+
 	public void setNo(int p_no) {
 		no = p_no;
 	}
 
+	public void setHigh(int p_high) {
+		if(!((high >= ave) && (0 <= high) && (high <= 100))) {
+			System.err.println(" ERROR dayo----");
+		} else {
+			high = p_high;
+		}
+	}
 	public int getNo() {
 		return no;
 	}
 	public int getNum() {
-		return no;
+		return num;
 	}
 }
