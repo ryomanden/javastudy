@@ -9,9 +9,6 @@ public class ArgsTest2 {
 			System.out.print("[" +topArg.charAt(i)+ "]");
 		}
 
-
-
-
 		System.out.println();
 		for(int i = 0; i < args.length; i++) {
 			System.out.print("arg " +i+ " : " +args[i]);
