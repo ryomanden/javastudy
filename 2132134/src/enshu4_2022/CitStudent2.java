@@ -32,7 +32,7 @@ public class CitStudent2 {
 		num += 1;
 	}
 
-	public void addScore(int score) {	
+	public void addScore(int score) {
 	}
 
 	public void setNo(int p_no) {
