@@ -11,7 +11,8 @@ import java.awt.event.WindowEvent;
 public class Paint extends Frame implements MouseListener, MouseMotionListener {
 	int x, y;
 	//Circle c;
-	Box c;
+	//Box c;
+	Coord c;
 	
 	public static void main(String[] args) {
 		Paint f = new Paint();
@@ -35,7 +36,12 @@ public class Paint extends Frame implements MouseListener, MouseMotionListener {
 	@Override public void mousePressed(MouseEvent e) {
 		if(c == null) {
 			//c = new Circle();
-			c = new Box();
+			//c = new Box();
+			if (e.getButton() == MouseEvent.BUTTON1) {
+				c = new Circle();
+			} else {
+				c = new Box();
+			}
 			c.moveto(e.getX(), e.getY());
 		}
 		x = e.getX();

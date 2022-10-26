@@ -6,7 +6,7 @@ public class Box extends Coord {
 		int color, size;
 		Box() {
 			color = 0;
-			size = 10;
+			size = 50;
 			
 		}
 		@Override public void paint(Graphics g) {
