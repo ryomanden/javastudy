@@ -1,10 +1,15 @@
 package enshu6_2022;
 
+import java.awt.Graphics;
+
 public class Circle extends Coord {
 	int color, size;
 	Circle() {
 		color = 0;
-		size = 1;
+		size = 10;
 		
+	}
+	@Override public void paint(Graphics g) {
+		g.drawOval(x - size/2, y - size/2, size, size);
 	}
 }

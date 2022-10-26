@@ -1,5 +1,7 @@
 package enshu6_2022;
 
+import java.awt.Graphics;
+
 public class Coord {
 	int x, y;
 	Coord(){
@@ -13,6 +15,9 @@ public class Coord {
 		this.x = x;
 		this.y = y;
 	}
+	
+	public void paint(Graphics g) {}
+	
 	public void print() {
 		System.out.println("x = " +this.x+ " y = " +this.y);
 	}
