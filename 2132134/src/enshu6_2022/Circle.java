@@ -12,4 +12,8 @@ public class Circle extends Coord {
 	@Override public void paint(Graphics g) {
 		g.drawOval(x - size/2, y - size/2, size, size);
 	}
+	@Override public void move(int dx, int dy) {
+		x -= dx;
+		y -= dy;
+	}
 }
