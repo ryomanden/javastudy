@@ -5,6 +5,6 @@ public class Circle extends Coord {
 	Circle() {
 		color = 0;
 		size = 1;
-		System.out.println("Circle");
+		
 	}
 }
