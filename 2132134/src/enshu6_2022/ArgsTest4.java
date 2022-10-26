@@ -11,7 +11,7 @@ public class ArgsTest4 {
 		System.out.println("2: no = " +kodai.no+ " i = " +i);
 		
 	}
-	public void setNo(int p_no) {
-		no = p_no;
+	public void setNo(int no) {
+		this.no = no;
 	}
 }
