@@ -11,6 +11,7 @@ import java.awt.event.WindowEvent;
 public class Paint extends Frame implements MouseListener, MouseMotionListener {
 	int x, y;
 	//Circle c;
+	Box c;
 	
 	public static void main(String[] args) {
 		Paint f = new Paint();
