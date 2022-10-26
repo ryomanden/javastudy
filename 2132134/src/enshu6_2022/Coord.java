@@ -13,4 +13,7 @@ public class Coord {
 		this.x = x;
 		this.y = y;
 	}
+	public void print() {
+		System.out.println("x = " +this.x+ "y = " +this.y);
+	}
 }
