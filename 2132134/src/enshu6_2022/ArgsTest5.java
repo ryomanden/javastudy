@@ -10,10 +10,10 @@ public class ArgsTest5 {
 		setNo(kodai, 2132999);
 		System.out.println("2: no = " +kodai.no+ " i = " +i);
 	}
-	public static void setNo(ArgsTest5 student, int p_no) {
-		student.no = p_no;
+	public static void setNo(ArgsTest5 student, int no) {
+		student.no = no;
 		student.no++;
 		student = new ArgsTest5();
-		student.no  = 2132777;
+		student.no  = 2132666;
 	}
 }
