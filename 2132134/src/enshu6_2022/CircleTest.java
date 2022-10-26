@@ -8,5 +8,7 @@ public class CircleTest {
 		c.move(100, 100);
 		
 		c.moveto(100, 100);
+		
+		c.print();
 	}
 }
