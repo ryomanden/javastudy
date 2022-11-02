@@ -5,5 +5,6 @@ class CircleTest2 {
 		Coord c = new Circle();
 		c.move(100, 100);
 		System.out.println("x = " +c.x+ " y = " +c.y);
+		// c.setSize(20);
 	}
 }
