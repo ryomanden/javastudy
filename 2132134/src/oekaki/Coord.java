@@ -1,7 +1,5 @@
 package oekaki;
 
-import java.awt.Graphics;
-
 public class Coord {
 	int x, y;
 	Coord(){
@@ -10,6 +8,9 @@ public class Coord {
 	public void move(int dx, int dy) {
 		x += dx;
 		y += dy;
-		System.out.println("move1");
+	}
+	public void moveto(int x, int y) {
+		this.x = x;
+		this.y = y;
 	}
 }
