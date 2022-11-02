@@ -1,18 +1,13 @@
 package oekaki;
 
-public class Circle extends Coord {
-	int color, size;
+import java.awt.Graphics;
+
+public class Circle extends Figure {
+	int size;
 	Circle() {
-		color = 0;
 		size = 10;
-		
 	}
-	@Override public void move(int dx, int dy) {
-		x -= dx;
-		y -= dy;
-		System.out.println("move2");
-	}
-	public void setSize(int s) {
-		size = s;
+	@Override public void paint(Graphics g) {
+		g.drawOval(x - size/2, y - size/2, size, size);
 	}
 }
