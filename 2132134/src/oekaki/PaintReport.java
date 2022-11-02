@@ -15,7 +15,9 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 	ArrayList<Figure> objList;
 	Figure obj;
 	
+	static int drawCnt = 0;
 	public static void main(String[] args) {
+		if(args.length > 0) drawCnt = Integer.parseInt(args[0]);
 		PaintReport f = new PaintReport();
 		f.setSize(640,480);
 		f.setTitle("Report Sample");
@@ -52,7 +54,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		obj.moveto(x,y);
 		objList.add(obj);
 		obj = null;
-		if(objList.size() >= 31)objList.remove(0);
+		if(objList.size() > drawCnt)objList.remove(0);
 		System.out.println(objList.size());
 		repaint();
 	}
