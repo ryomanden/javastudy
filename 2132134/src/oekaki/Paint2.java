@@ -44,14 +44,15 @@ public class Paint2 extends Frame implements MouseListener, MouseMotionListener 
 		y = e.getY();
 		obj = new Circle();
 		obj.moveto(x, y);
+		objList.add(0,obj);
 		repaint();
 	}
 	@Override public void mouseReleased(MouseEvent e) {
 		x = e.getX();
 		y = e.getY();
-		obj.moveto(x,y);
-		objList.add(obj);
-		obj = null;
+		obj = new Circle();
+		obj.moveto(x, y);
+		objList.add(0,obj);
 		repaint();
 	}
 	@Override public void mouseClicked(MouseEvent e) {}
@@ -60,7 +61,9 @@ public class Paint2 extends Frame implements MouseListener, MouseMotionListener 
 	@Override public void mouseDragged(MouseEvent e) {
 		x = e.getX();
 		y = e.getY();
-		if(obj != null)obj.moveto(x,y);
+		obj = new Circle();
+		obj.moveto(x, y);
+		objList.add(0,obj);
 		repaint();
 	}
 	@Override public void mouseMoved(MouseEvent e) {}
