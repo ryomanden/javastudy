@@ -1,4 +1,4 @@
-package enshu6_2022;
+package oekaki;
 
 public class CircleTest {
 	public static void main(String[] args) {

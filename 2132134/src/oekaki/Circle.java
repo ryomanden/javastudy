@@ -1,4 +1,4 @@
-package enshu6_2022;
+package oekaki;
 
 import java.awt.Graphics;
 
