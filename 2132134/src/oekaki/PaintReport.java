@@ -52,9 +52,9 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		obj.moveto(x,y);
 		objList.add(obj);
 		obj = null;
-		repaint();
 		if(objList.size() >= 31)objList.remove(0);
 		System.out.println(objList.size());
+		repaint();
 	}
 	@Override public void mouseClicked(MouseEvent e) {}
 	@Override public void mouseEntered(MouseEvent e) {}
