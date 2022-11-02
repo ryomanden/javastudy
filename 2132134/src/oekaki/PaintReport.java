@@ -16,9 +16,9 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 	Figure obj;
 	
 	public static void main(String[] args) {
-		Paint2 f = new Paint2();
+		PaintReport f = new PaintReport();
 		f.setSize(640,480);
-		f.setTitle("Paint Sample");
+		f.setTitle("Report Sample");
 		f.addWindowListener(new WindowAdapter() {
 			@Override public void windowClosing(WindowEvent e) {
 				System.exit(0);
