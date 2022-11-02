@@ -60,7 +60,7 @@ public class Paint2 extends Frame implements MouseListener, MouseMotionListener 
 	@Override public void mouseDragged(MouseEvent e) {
 		x = e.getX();
 		y = e.getY();
-		if(obj != null)obj.moveto();
+		if(obj != null)obj.moveto(x,y);
 		repaint();
 	}
 	@Override public void mouseMoved(MouseEvent e) {}
