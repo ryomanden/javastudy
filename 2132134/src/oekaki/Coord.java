@@ -1,5 +1,7 @@
 package oekaki;
 
+import java.awt.Graphics;
+
 public class Coord {
 	int x, y;
 	Coord(){
