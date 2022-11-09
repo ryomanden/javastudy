@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class PaintReport extends Frame implements MouseListener, MouseMotionListener {
 	int x, y;
-	boolean sizeChange;
+	boolean sizeChange = false;
 	
 	ArrayList<Figure> objList;
 	Figure obj;
@@ -39,7 +39,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		Figure f;
 		for(int i = 0; i < objList.size(); i++) {
 			f = objList.get(i);
-			f.paint(g);
+			f.paint(g); 
 		}
 		if(obj != null) obj.paint(g);
 	}
@@ -63,7 +63,11 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		objList.add(obj);
 		obj = null;
 		if(objList.size() > drawCnt)objList.remove(0); // 引数で指定された数を超えた分remove
+		
+		new Line(new Coord(320,240),objList.get(objList.size()-1));
+		
 		System.out.println(objList.size());
+		System.out.println();
 		repaint();
 	}
 	@Override public void mouseClicked(MouseEvent e) {}
