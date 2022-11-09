@@ -1,0 +1,5 @@
+package oekaki;
+
+class Rectangle {
+
+}
