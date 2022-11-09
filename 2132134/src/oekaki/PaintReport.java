@@ -1,5 +1,6 @@
 package oekaki;
 
+import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -10,7 +11,7 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 public class PaintReport extends Frame implements MouseListener, MouseMotionListener {
-	int x, y;
+	int x, y, sizeChange = 0;
 	
 	ArrayList<Figure> objList;
 	Figure obj;
@@ -44,7 +45,13 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 	@Override public void mousePressed(MouseEvent e) {
 		x = e.getX();
 		y = e.getY();
-		obj = new Circle();
+		if(sizeChange == 0) {// 10px 50px kougoniiiii
+			obj = new Circle(10,new Color(100,255,0));
+			sizeChange = 1;
+		} else {
+			obj = new Circle(50,new Color(255,0,0)); 
+			sizeChange = 0;
+		}
 		obj.moveto(x, y);
 		repaint();
 	}
@@ -54,7 +61,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		obj.moveto(x,y);
 		objList.add(obj);
 		obj = null;
-		if(objList.size() > drawCnt)objList.remove(0);
+		if(objList.size() > drawCnt)objList.remove(0); // 引数で指定された数を超えた分remove
 		System.out.println(objList.size());
 		repaint();
 	}

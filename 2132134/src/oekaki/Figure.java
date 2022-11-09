@@ -7,5 +7,6 @@ public class Figure extends Coord {
 	Figure(){
 		color = 0;
 	}
-	public void paint(Graphics g) {}
+	public void paint(Graphics g) {
+	}
 }
