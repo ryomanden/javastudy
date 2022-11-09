@@ -11,7 +11,8 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 public class PaintReport extends Frame implements MouseListener, MouseMotionListener {
-	int x, y, sizeChange = 0;
+	int x, y;
+	boolean sizeChange;
 	
 	ArrayList<Figure> objList;
 	Figure obj;
@@ -45,12 +46,12 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 	@Override public void mousePressed(MouseEvent e) {
 		x = e.getX();
 		y = e.getY();
-		if(sizeChange == 0) {// 10px 50px kougoniiiii
-			obj = new Circle(10,new Color(100,255,0));
-			sizeChange = 1;
+		if(sizeChange == false) {// 10px 50px kougoniiiii
+			obj = new Circle(10);
+			sizeChange = !sizeChange;
 		} else {
-			obj = new Circle(50,new Color(255,0,0)); 
-			sizeChange = 0;
+			obj = new Rectangle(50,new Color(255,0,0)); 
+			sizeChange = !sizeChange;
 		}
 		obj.moveto(x, y);
 		repaint();
