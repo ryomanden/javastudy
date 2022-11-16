@@ -1,6 +1,8 @@
 package report;
 
 import java.awt.Button;
+import java.awt.Checkbox;
+import java.awt.CheckboxGroup;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
@@ -8,6 +10,8 @@ import java.awt.Label;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -18,6 +22,7 @@ import java.util.ArrayList;
 public class PaintReport extends Frame implements MouseListener, MouseMotionListener {
 	int x, y, objSize = 30;
 	boolean sizeChange = false;
+	boolean sizeBig = false;
 	
 	ArrayList<Figure> objList;
 	ArrayList<Figure> lineList;
@@ -29,7 +34,11 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 	static Button applyButton = new Button("Apply");
 	static Label objcountLabel = new Label();
 	static Label sizeLabel = new Label();
-	static TextField objcountField= new TextField();
+	static Label countLabel = new Label("MaxObjectCount");
+	static TextField objcountField = new TextField();
+	static CheckboxGroup cbg = new CheckboxGroup();
+	static Checkbox staticsizeCheckbox = new Checkbox("Static size",cbg, true);
+	static Checkbox changesizeCheckbox = new Checkbox("Change size",cbg, false);
 	
 	static int drawCnt = 30;
 	public static void main(String[] args) {
@@ -46,18 +55,28 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		});
 		clearButton.setBounds(20, 40, 80, 30);
 		objcountLabel.setBounds(20, 70, 120, 30);
+		
 		sizeincButton.setBounds(20, 120, 50, 20);
 		sizeLabel.setBounds(20, 145, 120, 30);
 		sizedecButton.setBounds(20, 180, 50, 20);
-		objcountField.setBounds(20, 220, 50, 20);
-		applyButton.setBounds(20, 250, 70, 20);
+		
+		staticsizeCheckbox.setBounds(20, 210, 100, 20);
+		changesizeCheckbox.setBounds(20, 240, 100, 20);
+		
+		countLabel.setBounds(20, 280, 100, 20);
+		objcountField.setBounds(20, 310, 50, 20);
+		applyButton.setBounds(20, 340, 70, 20);
+
 		f.add(clearButton);
 		f.add(objcountLabel);
 		f.add(sizeincButton);
 		f.add(sizeLabel);
 		f.add(sizedecButton);
+		f.add(countLabel);
 		f.add(objcountField);
 		f.add(applyButton);
+		f.add(staticsizeCheckbox);
+		f.add(changesizeCheckbox);
 		f.btnEvent();
 		f.labelUpdate();
 		objcountField.setText(Integer.valueOf(drawCnt).toString());
@@ -88,9 +107,24 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		});
 		applyButton.addActionListener(new ActionListener() {
 			@Override public void actionPerformed(ActionEvent e) {
+				objList.clear();
+				lineList.clear();
 				fieldUpdate();
+				labelUpdate();
+				repaint();
 			}
 		});
+		
+        staticsizeCheckbox.addItemListener(new ItemListener() {  
+            public void itemStateChanged(ItemEvent e) {               
+            	sizeChange = false;
+            }  
+         });  
+        changesizeCheckbox.addItemListener(new ItemListener() {  
+            public void itemStateChanged(ItemEvent e) {               
+               sizeChange = true;
+            }  
+         });
 	}
 	void labelUpdate() {
 		objcountLabel.setText("ObjectCount is " +objList.size());
@@ -123,9 +157,21 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 	@Override public void mousePressed(MouseEvent e) {
 		x = e.getX();
 		y = e.getY();
-
-		obj = new Circle(objSize,new Color(255,0,0));
-		sizeChange = !sizeChange;
+		
+		if(sizeChange == false) {
+			obj = new Circle(objSize,new Color(255,0,0));
+		} else {
+			if (sizeBig == false) {
+				obj = new Circle(10,new Color(255,0,0));
+				sizeBig = !sizeBig;
+			} else {
+				obj = new Circle(50,new Color(255,0,0));
+				sizeBig = !sizeBig;
+			}
+		}
+		
+		
+		
 		obj.moveto(x, y);
 		repaint();
 	}
