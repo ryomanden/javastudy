@@ -4,6 +4,7 @@ import java.awt.Button;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -20,7 +21,8 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 	ArrayList<Figure> objList;
 	Figure obj;
 	
-	static Button btn1 = new Button("okay");
+	static Button clearButton = new Button("Clear");
+	static Label objcountLabel = new Label();
 	
 	static int drawCnt = 0;
 	public static void main(String[] args) {
@@ -36,14 +38,17 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 			
 		});
 		f.btnEvent();
-		btn1.setBounds(320, 240, 50, 25);
-		f.add(btn1);
+		clearButton.setBounds(10, 40, 80, 30);
+		objcountLabel.setBounds(10, 70, 120, 30);
+		f.add(clearButton);
+		f.add(objcountLabel);
 		f.setVisible(true);
 	}
 	void btnEvent() {
-		btn1.addActionListener(new ActionListener() {
+		clearButton.addActionListener(new ActionListener() {
 			@Override public void actionPerformed(ActionEvent e) {
 				objList.clear();
+				objcountLabel.setText("ObjectCount is " +objList.size());
 				repaint();
 			}
 		});
@@ -57,7 +62,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 	@Override public void paint(Graphics g) {
 		Figure f;
 		for(int i = 0; i < objList.size(); i++) {
-			f = objList.get(i );
+			f = objList.get(i);
 			f.paint(g); 
 		}
 		if(obj != null) obj.paint(g);
@@ -86,6 +91,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		new Line(new Coord(320,240),objList.get(objList.size()-1));
 		
 		System.out.println(objList.size());
+		objcountLabel.setText("ObjectCount is " +objList.size());
 		System.out.println();
 		repaint();
 	}
