@@ -19,6 +19,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 	boolean sizeChange = false;
 	
 	ArrayList<Figure> objList;
+	ArrayList<Figure> lineList;
 	Figure obj;
 	
 	static Button clearButton = new Button("Clear");
@@ -27,7 +28,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 	static Label objcountLabel = new Label();
 	static Label sizeLabel = new Label();
 	
-	static int drawCnt = 0;
+	static int drawCnt = 10;
 	public static void main(String[] args) {
 		if(args.length > 0) drawCnt = Integer.parseInt(args[0]);
 		PaintReport f = new PaintReport();
@@ -42,9 +43,9 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		});
 		clearButton.setBounds(10, 40, 80, 30);
 		objcountLabel.setBounds(10, 70, 120, 30);
-		sizeincButton.setBounds(10, 100, 50, 50);
-		sizeLabel.setBounds(10, 150, 120, 30);
-		sizedecButton.setBounds(10, 180, 50, 50);
+		sizeincButton.setBounds(10, 120, 50, 20);
+		sizeLabel.setBounds(10, 145, 120, 30);
+		sizedecButton.setBounds(10, 180, 50, 20);
 		f.add(clearButton);
 		f.add(objcountLabel);
 		f.add(sizeincButton);
@@ -58,6 +59,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		clearButton.addActionListener(new ActionListener() {
 			@Override public void actionPerformed(ActionEvent e) {
 				objList.clear();
+				lineList.clear();
 				labelUpdate();
 				repaint();
 			}
@@ -86,6 +88,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 	
 	PaintReport(){
 		objList = new ArrayList<Figure>();
+		lineList = new ArrayList<Figure>();
 		addMouseListener(this);
 		addMouseMotionListener(this);
 	}
@@ -93,7 +96,12 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		Figure f;
 		for(int i = 0; i < objList.size(); i++) {
 			f = objList.get(i);
-			f.paint(g); 
+			f.paint(g);
+		}
+		for(int i = 0; i < lineList.size(); i++) {
+
+			f = lineList.get(i);
+			f.paint(g);
 		}
 		if(obj != null) obj.paint(g);
 	}
@@ -116,9 +124,16 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		obj.moveto(x,y);
 		objList.add(obj);
 		obj = null;
-		if(objList.size() > drawCnt)objList.remove(0); // 引数で指定された数を超えた分remove
+		if(objList.size() > drawCnt) {
+			objList.remove(0);
+			lineList.remove(0);// 引数で指定された数を超えた分remove
+		}
 		
-		new Line(new Coord(320,240),objList.get(objList.size()-1));
+		if(objList.size()-1 > 0) {
+			obj = new Line(objList.get(objList.size()-2),objList.get(objList.size()-1));
+			lineList.add(obj);
+			obj = null;
+		}
 		
 		System.out.println(objList.size());
 		labelUpdate();
