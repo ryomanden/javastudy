@@ -1,8 +1,11 @@
 package oekaki;
 
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -17,19 +20,35 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 	ArrayList<Figure> objList;
 	Figure obj;
 	
+	static Button btn1 = new Button("okay");
+	
 	static int drawCnt = 0;
 	public static void main(String[] args) {
 		if(args.length > 0) drawCnt = Integer.parseInt(args[0]);
 		PaintReport f = new PaintReport();
 		f.setSize(640,480);
+		f.setLayout(null);
 		f.setTitle("Report Sample");
 		f.addWindowListener(new WindowAdapter() {
 			@Override public void windowClosing(WindowEvent e) {
 				System.exit(0);
 			}
+			
 		});
+		f.btnEvent();
+		btn1.setBounds(320, 240, 50, 25);
+		f.add(btn1);
 		f.setVisible(true);
 	}
+	void btnEvent() {
+		btn1.addActionListener(new ActionListener() {
+			@Override public void actionPerformed(ActionEvent e) {
+				objList.clear();
+				repaint();
+			}
+		});
+	}
+	
 	PaintReport(){
 		objList = new ArrayList<Figure>();
 		addMouseListener(this);
@@ -38,7 +57,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 	@Override public void paint(Graphics g) {
 		Figure f;
 		for(int i = 0; i < objList.size(); i++) {
-			f = objList.get(i);
+			f = objList.get(i );
 			f.paint(g); 
 		}
 		if(obj != null) obj.paint(g);
