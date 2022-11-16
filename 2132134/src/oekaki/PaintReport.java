@@ -15,14 +15,17 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 public class PaintReport extends Frame implements MouseListener, MouseMotionListener {
-	int x, y;
+	int x, y, objSize = 10;
 	boolean sizeChange = false;
 	
 	ArrayList<Figure> objList;
 	Figure obj;
 	
 	static Button clearButton = new Button("Clear");
+	static Button sizeincButton = new Button("+");
+	static Button sizedecButton = new Button("-");
 	static Label objcountLabel = new Label();
+	static Label sizeLabel = new Label();
 	
 	static int drawCnt = 0;
 	public static void main(String[] args) {
@@ -39,8 +42,14 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		});
 		clearButton.setBounds(10, 40, 80, 30);
 		objcountLabel.setBounds(10, 70, 120, 30);
+		sizeincButton.setBounds(10, 100, 50, 50);
+		sizeLabel.setBounds(10, 150, 120, 30);
+		sizedecButton.setBounds(10, 180, 50, 50);
 		f.add(clearButton);
 		f.add(objcountLabel);
+		f.add(sizeincButton);
+		f.add(sizeLabel);
+		f.add(sizedecButton);
 		f.btnEvent();
 		f.labelUpdate();
 		f.setVisible(true);
@@ -53,9 +62,26 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 				repaint();
 			}
 		});
+		sizeincButton.addActionListener(new ActionListener() {
+			@Override public void actionPerformed(ActionEvent e) {
+				objSize += 10;
+				labelUpdate();
+				repaint();
+			}
+		});
+		sizedecButton.addActionListener(new ActionListener() {
+			@Override public void actionPerformed(ActionEvent e) {
+				if(objSize > 0) {
+					objSize -= 10;					
+				}
+				labelUpdate();
+				repaint();
+			}
+		});
 	}
 	void labelUpdate() {
 		objcountLabel.setText("ObjectCount is " +objList.size());
+		sizeLabel.setText("Size " +objSize+ "px");
 	}
 	
 	PaintReport(){
@@ -75,10 +101,10 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		x = e.getX();
 		y = e.getY();
 		if(sizeChange == false) {// 10px 50px kougoniiiii
-			obj = new Circle(10);
+			obj = new Circle(objSize);
 			sizeChange = !sizeChange;
 		} else {
-			obj = new Rectangle(50,new Color(255,0,0)); 
+			obj = new Circle(objSize,new Color(255,0,0)); 
 			sizeChange = !sizeChange;
 		}
 		obj.moveto(x, y);
