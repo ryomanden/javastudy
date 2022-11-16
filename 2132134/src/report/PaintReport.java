@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Label;
+import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -15,7 +16,7 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 public class PaintReport extends Frame implements MouseListener, MouseMotionListener {
-	int x, y, objSize = 10;
+	int x, y, objSize = 30;
 	boolean sizeChange = false;
 	
 	ArrayList<Figure> objList;
@@ -25,14 +26,16 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 	static Button clearButton = new Button("Clear");
 	static Button sizeincButton = new Button("+");
 	static Button sizedecButton = new Button("-");
+	static Button applyButton = new Button("Apply");
 	static Label objcountLabel = new Label();
 	static Label sizeLabel = new Label();
+	static TextField objcountField= new TextField();
 	
-	static int drawCnt = 10;
+	static int drawCnt = 30;
 	public static void main(String[] args) {
 		if(args.length > 0) drawCnt = Integer.parseInt(args[0]);
 		PaintReport f = new PaintReport();
-		f.setSize(640,480);
+		f.setSize(1280,720);
 		f.setLayout(null);
 		f.setTitle("Report Sample");
 		f.addWindowListener(new WindowAdapter() {
@@ -46,11 +49,15 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		sizeincButton.setBounds(10, 120, 50, 20);
 		sizeLabel.setBounds(10, 145, 120, 30);
 		sizedecButton.setBounds(10, 180, 50, 20);
+		objcountField.setBounds(10, 220, 50, 20);
+		applyButton.setBounds(10, 250, 70, 20);
 		f.add(clearButton);
 		f.add(objcountLabel);
 		f.add(sizeincButton);
 		f.add(sizeLabel);
 		f.add(sizedecButton);
+		f.add(objcountField);
+		f.add(applyButton);
 		f.btnEvent();
 		f.labelUpdate();
 		f.setVisible(true);
@@ -68,7 +75,6 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 			@Override public void actionPerformed(ActionEvent e) {
 				objSize += 10;
 				labelUpdate();
-				repaint();
 			}
 		});
 		sizedecButton.addActionListener(new ActionListener() {
@@ -77,13 +83,21 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 					objSize -= 10;					
 				}
 				labelUpdate();
-				repaint();
+			}
+		});
+		applyButton.addActionListener(new ActionListener() {
+			@Override public void actionPerformed(ActionEvent e) {
+				fieldUpdate();
 			}
 		});
 	}
 	void labelUpdate() {
 		objcountLabel.setText("ObjectCount is " +objList.size());
 		sizeLabel.setText("Size " +objSize+ "px");
+	}
+	void fieldUpdate() {
+		String drawMax = objcountField.getText();
+		drawCnt = Integer.parseInt(drawMax);
 	}
 	
 	PaintReport(){
@@ -108,13 +122,9 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 	@Override public void mousePressed(MouseEvent e) {
 		x = e.getX();
 		y = e.getY();
-		if(sizeChange == false) {// 10px 50px kougoniiiii
-			obj = new Circle(objSize);
-			sizeChange = !sizeChange;
-		} else {
-			obj = new Rectangle(objSize,new Color(255,0,0)); 
-			sizeChange = !sizeChange;
-		}
+
+		obj = new Circle(objSize,new Color(255,0,0));
+		sizeChange = !sizeChange;
 		obj.moveto(x, y);
 		repaint();
 	}
