@@ -44,13 +44,13 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 			}
 			
 		});
-		clearButton.setBounds(10, 40, 80, 30);
-		objcountLabel.setBounds(10, 70, 120, 30);
-		sizeincButton.setBounds(10, 120, 50, 20);
-		sizeLabel.setBounds(10, 145, 120, 30);
-		sizedecButton.setBounds(10, 180, 50, 20);
-		objcountField.setBounds(10, 220, 50, 20);
-		applyButton.setBounds(10, 250, 70, 20);
+		clearButton.setBounds(20, 40, 80, 30);
+		objcountLabel.setBounds(20, 70, 120, 30);
+		sizeincButton.setBounds(20, 120, 50, 20);
+		sizeLabel.setBounds(20, 145, 120, 30);
+		sizedecButton.setBounds(20, 180, 50, 20);
+		objcountField.setBounds(20, 220, 50, 20);
+		applyButton.setBounds(20, 250, 70, 20);
 		f.add(clearButton);
 		f.add(objcountLabel);
 		f.add(sizeincButton);
@@ -60,6 +60,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		f.add(applyButton);
 		f.btnEvent();
 		f.labelUpdate();
+		objcountField.setText(Integer.valueOf(drawCnt).toString());
 		f.setVisible(true);
 	}
 	void btnEvent() {
