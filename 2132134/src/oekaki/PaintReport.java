@@ -37,21 +37,25 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 			}
 			
 		});
-		f.btnEvent();
 		clearButton.setBounds(10, 40, 80, 30);
 		objcountLabel.setBounds(10, 70, 120, 30);
 		f.add(clearButton);
 		f.add(objcountLabel);
+		f.btnEvent();
+		f.labelUpdate();
 		f.setVisible(true);
 	}
 	void btnEvent() {
 		clearButton.addActionListener(new ActionListener() {
 			@Override public void actionPerformed(ActionEvent e) {
 				objList.clear();
-				objcountLabel.setText("ObjectCount is " +objList.size());
+				labelUpdate();
 				repaint();
 			}
 		});
+	}
+	void labelUpdate() {
+		objcountLabel.setText("ObjectCount is " +objList.size());
 	}
 	
 	PaintReport(){
@@ -91,7 +95,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		new Line(new Coord(320,240),objList.get(objList.size()-1));
 		
 		System.out.println(objList.size());
-		objcountLabel.setText("ObjectCount is " +objList.size());
+		labelUpdate();
 		System.out.println();
 		repaint();
 	}
