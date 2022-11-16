@@ -8,6 +8,9 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import report.Circle;
+import report.Coord;
+
 public class Paint extends Frame implements MouseListener, MouseMotionListener {
 	int x, y;
 	//Circle c;

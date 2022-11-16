@@ -1,4 +1,4 @@
-package oekaki;
+package report;
 
 import java.awt.Button;
 import java.awt.Color;
@@ -104,7 +104,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 			obj = new Circle(objSize);
 			sizeChange = !sizeChange;
 		} else {
-			obj = new Circle(objSize,new Color(255,0,0)); 
+			obj = new Rectangle(objSize,new Color(255,0,0)); 
 			sizeChange = !sizeChange;
 		}
 		obj.moveto(x, y);

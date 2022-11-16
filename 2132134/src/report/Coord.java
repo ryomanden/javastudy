@@ -1,4 +1,4 @@
-package oekaki;
+package report;
 
 public class Coord {
 	int x, y;

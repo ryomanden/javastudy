@@ -2,6 +2,9 @@ package oekaki;
 
 import java.util.ArrayList;
 
+import report.Circle;
+import report.Coord;
+
 class CircleTest2 {
 	public static void main(String[] args) {
 		ArrayList<Coord> objList = new ArrayList<Coord>();

@@ -2,6 +2,8 @@ package oekaki;
 
 import java.awt.Graphics;
 
+import report.Coord;
+
 public class Box extends Coord {
 		int color, size;
 		Box() {

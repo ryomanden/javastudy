@@ -1,4 +1,4 @@
-package oekaki;
+package report;
 
 import java.awt.Graphics;
 

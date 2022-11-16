@@ -9,6 +9,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
+import report.Circle;
+import report.Figure;
+
 public class Paint2 extends Frame implements MouseListener, MouseMotionListener {
 	int x, y;
 	
