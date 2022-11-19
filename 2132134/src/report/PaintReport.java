@@ -20,6 +20,7 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 public class PaintReport extends Frame implements MouseListener, MouseMotionListener {
+	//変数の宣言
 	int x, y, objSize = 30;
 	boolean sizeChange = false;
 	boolean sizeBig = false;
@@ -182,12 +183,12 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		objList.add(obj);
 		obj = null;
 		if(objList.size() > drawCnt) {
-			objList.remove(0);
-			lineList.remove(0);// 引数で指定された数を超えた分remove
+			objList.remove(0);// 引数で指定された数を超えた分remove
+			lineList.remove(0);
 		}
 		
 		if(objList.size()-1 > 0) {
-			obj = new Line(objList.get(objList.size()-2),objList.get(objList.size()-1));
+			obj = new Line(objList.get(objList.size()-2),objList.get(objList.size()-1));// 前に追加された図と今追加された図の座標の間に線を引く
 			lineList.add(obj);
 			obj = null;
 		}
