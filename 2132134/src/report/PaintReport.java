@@ -36,7 +36,13 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 	static Label objcountLabel = new Label();
 	static Label sizeLabel = new Label();
 	static Label countLabel = new Label("MaxObjectCount");
+	static Label redLabel = new Label("R :");
+	static Label greenLabel = new Label("G :");
+	static Label blueLabel = new Label("B :");
 	static TextField objcountField = new TextField();
+	static TextField redField = new TextField();
+	static TextField greenField = new TextField();
+	static TextField blueField = new TextField();
 	static CheckboxGroup cbg = new CheckboxGroup();
 	static Checkbox staticsizeCheckbox = new Checkbox("Static size",cbg, true);
 	static Checkbox changesizeCheckbox = new Checkbox("Change size",cbg, false);
@@ -66,7 +72,13 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		
 		countLabel.setBounds(20, 280, 100, 20);
 		objcountField.setBounds(20, 310, 50, 20);
-		applyButton.setBounds(20, 340, 70, 20);
+		redLabel.setBounds(20, 340, 20, 20);
+		redField.setBounds(40, 340, 40, 20);
+		greenLabel.setBounds(90, 340, 20, 20);
+		greenField.setBounds(110, 340, 40, 20);
+		blueLabel.setBounds(160, 340, 20, 20);
+		blueField.setBounds(190, 340, 40, 20);
+		applyButton.setBounds(20, 370, 70, 20);
 
 		f.add(clearButton);
 		f.add(objcountLabel);
@@ -78,6 +90,12 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		f.add(applyButton);
 		f.add(staticsizeCheckbox);
 		f.add(changesizeCheckbox);
+		f.add(redLabel);
+		f.add(redField);
+		f.add(greenLabel);
+		f.add(greenField);
+		f.add(blueLabel);
+		f.add(blueField);
 		f.btnEvent();
 		f.labelUpdate();
 		objcountField.setText(Integer.valueOf(drawCnt).toString());
@@ -134,6 +152,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 	void fieldUpdate() {
 		String drawMax = objcountField.getText();
 		drawCnt = Integer.parseInt(drawMax);
+		
 	}
 	
 	PaintReport(){

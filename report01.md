@@ -12,23 +12,16 @@ author:Ryo Mitsuda
 
 
 # 第1回レポート
-
 ## 1. 目的
-
 配布されたペイントプログラムへの機能追加を行い，クラス・インスタンス・メソッドなどのJavaおよびオブジェクト指向言語の特徴を理解する．
 
-<!--- ここに目的 --->
-
 ## 2. 課題
-
 <!--- ここに課題 --->
 
 ## 3. 理論
-
 <!--- ここに理論 --->
 
 ## 4. プログラム
-
 パッケージ内の構成，および実行に係るファイルの階層は以下の通りである．
 
 ```Shell : Tree
@@ -44,30 +37,14 @@ report
 ```java : PaintReport.java
 package report;
 
-import java.awt.Button;
-import java.awt.Checkbox;
-import java.awt.CheckboxGroup;
-import java.awt.Color;
-import java.awt.Frame;
-import java.awt.Graphics;
-import java.awt.Label;
-import java.awt.TextField;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 public class PaintReport extends Frame implements MouseListener, MouseMotionListener {
 	int x, y, objSize = 30;
 	boolean sizeChange = false;
 	boolean sizeBig = false;
-	
 	ArrayList<Figure> objList;
 	ArrayList<Figure> lineList;
 	Figure obj;
