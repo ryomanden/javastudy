@@ -1,6 +1,5 @@
 ---
-title:
-header:
+title:title
 author:Ryo Mitsuda
 ---
 
