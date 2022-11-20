@@ -20,37 +20,37 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 public class PaintReport extends Frame implements MouseListener, MouseMotionListener {
-	int x, y, objSize = 30;
-	boolean sizeChange = false;
-	boolean sizeBig = false;
+	int x, y, objSize = 30; //図形の初期サイズを変数objSizeにて定義する．
+	boolean sizeChange = false; //課題2.で実装した機能と任意のサイズを切り替えるため，GUIの指定状況を格納する変数．trueは課題2.を表す．
+	boolean sizeBig = false; //falseを10px，trueを50pxとし，サイズを交互に変更する際に利用する変数．
 
 	ArrayList<Figure> objList;
-	ArrayList<Figure> lineList;
+	ArrayList<Figure> lineList; //図形間に引いた線の情報を格納する．
 	Figure obj;
 	
+	/* GUI上に表示するボタン・テキスト・フォームなどを宣言する. */
+	static Button clearButton = new Button("Clear"); //クリアボタン
+	static Button sizeincButton = new Button("+"); //プラスボタン
+	static Button sizedecButton = new Button("-"); //マイナスボタン
+	static Button applyButton = new Button("Apply"); //変更適応ボタン
+	static Label objcountLabel = new Label(); //図形数表示ラベル
+	static Label sizeLabel = new Label(); //図形サイズラベル
+	static Label countLabel = new Label("MaxObjectCount"); //最大表示数のラベル
+	static Label redLabel = new Label("R :"); //赤色入力フォームのラベル
+	static Label greenLabel = new Label("G :"); //緑色入力フォームのラベル
+	static Label blueLabel = new Label("B :"); //青色入力フォームのラベル
+	static TextField objcountField = new TextField(); //最大表示数入力フォーム
+	static TextField redField = new TextField(); //赤色入力フォーム
+	static TextField greenField = new TextField(); //緑色入力フォーム
+	static TextField blueField = new TextField(); //青色入力フォーム
+	static CheckboxGroup cbg = new CheckboxGroup(); //サイズ変更モードを切り替えるチェックボックスのグループ
+	static Checkbox staticsizeCheckbox = new Checkbox("Static size",cbg, true); //サイズ指定モードを有効にするチェックボックス
+	static Checkbox changesizeCheckbox = new Checkbox("Change size",cbg, false); //課題2.モードを有効にするチェックボックス
 
-	static Button clearButton = new Button("Clear");
-	static Button sizeincButton = new Button("+");
-	static Button sizedecButton = new Button("-");
-	static Button applyButton = new Button("Apply");
-	static Label objcountLabel = new Label();
-	static Label sizeLabel = new Label();
-	static Label countLabel = new Label("MaxObjectCount");
-	static Label redLabel = new Label("R :");
-	static Label greenLabel = new Label("G :");
-	static Label blueLabel = new Label("B :");
-	static TextField objcountField = new TextField();
-	static TextField redField = new TextField();
-	static TextField greenField = new TextField();
-	static TextField blueField = new TextField();
-	static CheckboxGroup cbg = new CheckboxGroup();
-	static Checkbox staticsizeCheckbox = new Checkbox("Static size",cbg, true);
-	static Checkbox changesizeCheckbox = new Checkbox("Change size",cbg, false);
-
-	static int drawCnt = 30;
-	static Color color = new Color(0,0,0);
+	static int drawCnt = 30; //最大図形表示数を指定する変数．
+	static Color color = new Color(0,0,0); //図形色を指定するColorインスタンス変数．
+	
 	public static void main(String[] args) {
-		if(args.length > 0) drawCnt = Integer.parseInt(args[0]);
 		PaintReport f = new PaintReport();
 		f.setSize(1280,720);
 		f.setLayout(null);
@@ -61,26 +61,29 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 			}
 
 		});
-		clearButton.setBounds(20, 40, 80, 30);
-		objcountLabel.setBounds(20, 70, 120, 30);
+		
+		/* ボタンなどのインターフェースを配置する座標を設定する． */
+		clearButton.setBounds(20, 40, 80, 30); //クリアボタン
+		objcountLabel.setBounds(20, 70, 120, 30); //図形数表示ラベル
 
-		sizeincButton.setBounds(20, 120, 50, 20);
-		sizeLabel.setBounds(20, 145, 120, 30);
-		sizedecButton.setBounds(20, 180, 50, 20);
+		sizeincButton.setBounds(20, 120, 50, 20); //プラスボタン
+		sizeLabel.setBounds(20, 145, 120, 30); //図形サイズラベル
+		sizedecButton.setBounds(20, 180, 50, 20); //マイナスボタン
 
-		staticsizeCheckbox.setBounds(20, 210, 100, 20);
-		changesizeCheckbox.setBounds(20, 240, 100, 20);
+		staticsizeCheckbox.setBounds(20, 210, 100, 20); //サイズ指定モード
+		changesizeCheckbox.setBounds(20, 240, 100, 20); //課題2.モード
 
-		countLabel.setBounds(20, 280, 100, 20);
-		objcountField.setBounds(20, 310, 50, 20);
-		redLabel.setBounds(20, 340, 20, 20);
-		redField.setBounds(40, 340, 30, 20);
-		greenLabel.setBounds(80, 340, 20, 20);
-		greenField.setBounds(100, 340, 30, 20);
-		blueLabel.setBounds(140, 340, 20, 20);
-		blueField.setBounds(160, 340, 30, 20);
-		applyButton.setBounds(20, 370, 70, 20);
-
+		countLabel.setBounds(20, 280, 100, 20); //最大表示数ラベル
+		objcountField.setBounds(20, 310, 50, 20); //最大表示数フォーム
+		redLabel.setBounds(20, 340, 20, 20); //Redラベル
+		redField.setBounds(40, 340, 30, 20); //Red入力フォーム
+		greenLabel.setBounds(80, 340, 20, 20); //Greenラベル
+		greenField.setBounds(100, 340, 30, 20); //Greenフォーム
+		blueLabel.setBounds(140, 340, 20, 20); //Blueラベル
+		blueField.setBounds(160, 340, 30, 20); //Blueフォーム
+		applyButton.setBounds(20, 370, 70, 20); //変更適応ボタン
+		
+		/* ボタンなどのインターフェースをウィンドウに追加する */
 		f.add(clearButton);
 		f.add(objcountLabel);
 		f.add(sizeincButton);
@@ -97,71 +100,88 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		f.add(greenField);
 		f.add(blueLabel);
 		f.add(blueField);
-		f.btnEvent();
-		f.labelUpdate();
 
-		objcountField.setText(Integer.valueOf(drawCnt).toString());
-		redField.setText("0");
+		f.btnEvent(); //ボタン入力に応じた処理を行うメソッドを呼び出す．
+		f.labelUpdate(); //ラベルの内容を変更するメソッドを呼び出す．
+
+		objcountField.setText(Integer.valueOf(drawCnt).toString()); //最大表示数を変数の初期値に設定する．入力フォームはString型のみ対応なので，String->int変換も行う．
+		
+		/* RGBそれぞれの入力フォームを0で初期化する． */
+		redField.setText("0"); 
 		greenField.setText("0");
 		blueField.setText("0");
 
 		f.setVisible(true);
 	}
+	
+	/* ボタンとチェックボックスの入力に応じた処理を定義するメソッドである． */
 	void btnEvent() {
-		clearButton.addActionListener(new ActionListener() {
+		clearButton.addActionListener(new ActionListener() { //Clearボタンの処理．
 			@Override public void actionPerformed(ActionEvent e) {
-				objList.clear();
-				lineList.clear();
-				labelUpdate();
-				repaint();
+				objList.clear(); //objList内の図形を消す．
+				lineList.clear(); //lineList内の線を消す．
+				labelUpdate(); //ラベルの更新を行う．
+				repaint(); //図形を再描画する（何も表示しない）．
 			}
 		});
-		sizeincButton.addActionListener(new ActionListener() {
+		sizeincButton.addActionListener(new ActionListener() { //プラスボタンの処理．
 			@Override public void actionPerformed(ActionEvent e) {
-				objSize += 10;
-				labelUpdate();
+				objSize += 10; //objSize変数に10を足す．
+				labelUpdate(); //ラベルの更新を行う．
 			}
 		});
-		sizedecButton.addActionListener(new ActionListener() {
+		sizedecButton.addActionListener(new ActionListener() { //マイナスボタンの処理．
 			@Override public void actionPerformed(ActionEvent e) {
-				if(objSize > 0) {
-					objSize -= 10;
+				if(objSize > 0) { //objSizeがマイナスになった場合は処理を行わない．
+					objSize -= 10; //objSize変数を10減らす．
 				}
-				labelUpdate();
+				labelUpdate(); //ラベルの更新を行う．
 			}
 		});
-		applyButton.addActionListener(new ActionListener() {
+		applyButton.addActionListener(new ActionListener() { //適応ボタンの処理．
 			@Override public void actionPerformed(ActionEvent e) {
-				objList.clear();
-				lineList.clear();
-				fieldUpdate();
-				labelUpdate();
+				objList.clear(); //最大描画数が変わった場合，一度描画された図形は表示され続けてしまうため，一度すべての図形を消す．
+				lineList.clear(); //上に同じ
+				fieldUpdate(); //入力フォームの変更を取得する．
+				labelUpdate(); //ラベルの更新を行う．
 				repaint();
 			}
 		});
 
-		staticsizeCheckbox.addItemListener(new ItemListener() {  
+		staticsizeCheckbox.addItemListener(new ItemListener() {  //サイズ指定モードの処理，
 			public void itemStateChanged(ItemEvent e) {               
-				sizeChange = false;
+				sizeChange = false; //課題2.モードではない事を表すため，falseを代入する．
 			}  
 		});  
-		changesizeCheckbox.addItemListener(new ItemListener() {  
+		changesizeCheckbox.addItemListener(new ItemListener() {  //課題2.モードの処理．
 			public void itemStateChanged(ItemEvent e) {               
-				sizeChange = true;
+				sizeChange = true; //課題2.モードを表すtrueを代入する．
 			}  
 		});
 	}
+	
+	/* ラベルの内容を変更するメソッド */
 	void labelUpdate() {
-		objcountLabel.setText("ObjectCount is " +objList.size());
-		sizeLabel.setText("Size " +objSize+ "px");
+		objcountLabel.setText("ObjectCount is " +objList.size()); //objListの長さを取得し，図形数としてラベルに表示する．
+		sizeLabel.setText("Size " +objSize+ "px"); //現在指定されているサイズをobjSize変数で取得し，ラベルに表示する．
 	}
+	
+	/* 入力フォームの内容を取得するメソッド */
 	void fieldUpdate() {
-		String str = objcountField.getText();
-		drawCnt = Integer.parseInt(str);
+		int in = Integer.parseInt(objcountField.getText()); //最大表示数フォームを取得し，int型に変換する．
+		if(0 < in)drawCnt = in; //入力された数が0より大きければ，最大表示数として設定する．
 		
-		color = new Color(Integer.parseInt(redField.getText()),Integer.parseInt(greenField.getText()),Integer.parseInt(blueField.getText()));
+		int Red = Integer.parseInt(redField.getText()); //赤色フォームを取得し，int型に変換する．
+		int Green = Integer.parseInt(greenField.getText()); //上に同じ．
+		int Blue = Integer.parseInt(blueField.getText()); //上に同じ．
+		if(!(Red < 0 || 255 < Red || Green < 0 || 255 < Green || Blue < 0 || 255 < Blue)) {
+			color = new Color(Red, Green, Blue); //RGBに入力された数が 0 <= RGB <= 255 を満たしていれば，colorに代入する．
+		}
 	}
-
+	
+	
+	/*--- ここまでコメント付けた ---*/
+	
 	PaintReport(){
 		objList = new ArrayList<Figure>();
 		lineList = new ArrayList<Figure>();
