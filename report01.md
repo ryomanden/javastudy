@@ -13,10 +13,22 @@ author:Ryo Mitsuda
 
 # 第1回レポート
 ## 1. 目的
-配布されたペイントプログラムへの機能追加を行い，クラス・インスタンス・メソッドなどのJavaおよびオブジェクト指向言語の特徴を理解する．
+ペイントプログラムへの機能追加を行い，クラス・インスタンス・メソッドなどのJavaおよびオブジェクト指向言語の特徴を理解する．
 
 ## 2. 課題
-<!--- ここに課題 --->
+本レポートでは，配布されたプログラムを改変し機能拡充を図る．
+実装する課題は以下の通りである．
+
+1. 画面上に描画される円の数を30個に制限する．
+2. 円を描画するたびに，円の直径を10pixel，50pixel と交互に変化させる．
+3. 円に適当な色を付ける．
+4. 2個目以降の円描画時に，直前に描画した円との中心間に線を引く．
+5. 四角形を描画できるようにする．
+6. 現在描画されている円および四角形の数をGUI上に表示する．
+7. 現在描画されている図形をすべて削除するボタンを追加する．
+8. 2.で実装した機能を改変し，GUI上で任意の描画数を指定できるようにする．
+9. 3.で実装した機能を改変し，GUI上で任意の描画サイズを指定できるようにする．
+10. 4.で実装した機能を改変し，GUI上で任意の色を選択できるようにする.
 
 ## 3. 理論
 <!--- ここに理論 --->
@@ -34,6 +46,8 @@ report
 └── Rectangle.java
 ```
 
+ウィンドウへの描画を行うメインのクラス`PaintReport`を以下に示す．提示した課題の実装箇所はソースコード内にコメント形式で記述する．なお，特にコメントの記述がない場合は，配布プログラムから変更を加えていない．
+
 ```java : PaintReport.java
 package report;
 
@@ -42,7 +56,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class PaintReport extends Frame implements MouseListener, MouseMotionListener {
-	int x, y, objSize = 30;
+	int x, y, objSize = 30; //描画する図形の初期サイズをobjSize変数にて定義する．
 	boolean sizeChange = false;
 	boolean sizeBig = false;
 	ArrayList<Figure> objList;
