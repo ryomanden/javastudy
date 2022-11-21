@@ -75,9 +75,9 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		sizedecButton.setBounds(20, 180, 50, 20); //マイナスボタン
 
 		staticsizeCheckbox.setBounds(20, 210, 100, 20); //サイズ指定モード
-		changesizeCheckbox.setBounds(20, 240, 100, 20); //課題2.モード
+		changesizeCheckbox.setBounds(20, 240, 150, 20); //課題2.モード
 
-		countLabel.setBounds(20, 280, 100, 20); //最大表示数ラベル
+		countLabel.setBounds(20, 280, 150, 20); //最大表示数ラベル
 		objcountField.setBounds(20, 310, 50, 20); //最大表示数フォーム
 		redLabel.setBounds(20, 340, 20, 20); //Redラベル
 		redField.setBounds(40, 340, 30, 20); //Red入力フォーム

@@ -28,7 +28,7 @@ author:Ryo Mitsuda
 7. 現在描画されている図形をすべて削除するボタンを追加する．
 8. 2.で実装した機能を改変し，GUI上で任意の描画数を指定できるようにする．
 9. 3.で実装した機能を改変し，GUI上で任意の描画サイズを指定できるようにする．
-10. 4.で実装した機能を改変し，GUI上で任意の色を選択できるようにする.
+10. 4.で実装した機能を改変し，GUI上で任意の色を指定できるようにする.
 
 ## 3. 理論
 <!--- ここに理論 --->
@@ -379,7 +379,23 @@ public class Rectangle extends Figure {
 
 ## 5. 動作検証，および実行環境
 
-|      | Macbook Air                  |
+動作の検証にあたり，下記条件の通り動作する場合にのみ正常動作とみなす．
+
+1. アプリケーションを起動し，何も変更しない状態で図形が３０個以上描画されない．
+2. [Change size]チェックボックスを選択し，図形が10px，50pxと交互に切り替わる．
+3. \[R]\[G]\[B]に0~255の適当な数値を入力し，\[apply]ボタンを押した後に描画した図形の色が変わる．なお，３つの値が0に近いほど黒に近くなるため，入力する値が小さいと変化がわかりにくい場合があるが，正常である．
+4. 図形を２個以上描画し，図形の間に線が描かれる．
+5. \[Rectangle]チェックボックスを選択し，四角形が描画される．また，上記全ての条件で円と同様に描画される．
+6. 線を除く，現在描画されている図形の数が`ObjectCount is 図形の数`の形式でGUI上に表示される．
+7. \[Clear]ボタンを押し，描画されていた全ての図形が削除される．
+8. \[MaxObjectCount]に１以上の適当な数値を入力し\[Apply]ボタンを押すと，描かれる図形の最大数が指定した数以上描画されない．
+9. \[Static size]チェックボックを選択し\[+]\[-]ボタンを押した際，図形の大きさが10pxずつ増減する．また，現在のサイズが`Size 図形の大きさ`の形式で表示される．なお，図形の大きさは常に0pxを下回らない．
+
+
+
+本プログラムの制作，および動作の検証は以下の環境で行なった．
+
+| Device | Macbook Air                  |
 | ---: | :--------------------------- |
 | OS   | MacOS Ventura Version 13.0.1 |
 | CPU  | Apple M1 |
@@ -387,15 +403,14 @@ public class Rectangle extends Figure {
 | Java version | Java17 |
 | eclipse version | 2022-09 (4.25.0) |
 
-
-
-
-
 ## 6.実行結果
+<!--- ここに --->
+<img src="/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-21 at 23.53.41.png" style="zoom:25%;" />
 
-<img src="/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-21 at 18.23.09.png" alt="Screenshot 2022-11-21 at 18.23.09" style="zoom:25%;" />
+<div style="text-align:center"><i>図１： 図形を30個描画．</i></div>
 
-<div style="text-align:center"><i>図１：</i></div>
+![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-21 at 23.53.47.png)
+<div style="text-align:center"><i>図２：図形を31個描画．</i></div>
 
 ## 6. 感想
 
