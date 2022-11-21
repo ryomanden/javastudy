@@ -46,7 +46,7 @@ report
 └── Rectangle.java
 ```
 
-ウィンドウへの描画を行うメインのクラス`PaintReport`を以下に示す．提示した課題の実装箇所はソースコード内にコメント形式で記述する．なお，特にコメントの記述がない場合は，配布プログラムから変更を加えていない．
+以下はウィンドウへの描画を行うメインのクラス`PaintReport`である．提示した課題の実装箇所はソースコード内にコメント形式で記述する．なお，特にコメントの記述がない場合は，配布プログラムから変更を加えていない．
 
 ```java : PaintReport.java
 package report;
@@ -317,7 +317,15 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 
 ```
 
+<!--- Circle class --->
 
+<!--- Rectangle class --->
+
+<!--- Line class --->
+
+<!--- Coord class --->
+
+<!--- Figure class --->
 
 ## 5. 動作検証
 

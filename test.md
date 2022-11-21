@@ -58,7 +58,7 @@ chusyaku[^\*1]
 
 
 
-
+Arrow -> arrow
 
 
 
