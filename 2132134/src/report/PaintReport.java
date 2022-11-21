@@ -23,6 +23,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 	int x, y, objSize = 30; //図形の初期サイズを変数objSizeにて定義する．
 	boolean sizeChange = false; //課題2.で実装した機能と任意のサイズを切り替えるため，GUIの指定状況を格納する変数．trueは課題2.を表す．
 	boolean sizeBig = false; //falseを10px，trueを50pxとし，サイズを交互に変更する際に利用する変数．
+	boolean objRect = false; //図形を切り替える変数．
 
 	ArrayList<Figure> objList;
 	ArrayList<Figure> lineList; //図形間に引いた線の情報を格納する．
@@ -44,8 +45,11 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 	static TextField greenField = new TextField(); //緑色入力フォーム
 	static TextField blueField = new TextField(); //青色入力フォーム
 	static CheckboxGroup cbg = new CheckboxGroup(); //サイズ変更モードを切り替えるチェックボックスのグループ
+	static CheckboxGroup cbg2 = new CheckboxGroup(); //図形を切り替えるチェックボックスのグループ
 	static Checkbox staticsizeCheckbox = new Checkbox("Static size",cbg, true); //サイズ指定モードを有効にするチェックボックス
 	static Checkbox changesizeCheckbox = new Checkbox("Change size",cbg, false); //課題2.モードを有効にするチェックボックス
+	static Checkbox circleCheckbox = new Checkbox("Circle",cbg2, true); //円モードを有効にするチェックボックス
+	static Checkbox rectCheckbox = new Checkbox("Rectangle",cbg2, false); //四角形モードを有効にするチェックボックス
 
 	static int drawCnt = 30; //最大図形表示数を指定する変数．
 	static Color color = new Color(0,0,0); //図形色を指定するColorインスタンス変数．
@@ -83,6 +87,9 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		blueField.setBounds(160, 340, 30, 20); //Blueフォーム
 		applyButton.setBounds(20, 370, 70, 20); //変更適応ボタン
 		
+		circleCheckbox.setBounds(20, 400, 100, 20); //円モード
+		rectCheckbox.setBounds(20, 430, 100, 20); //四角形モード
+		
 		/* ボタンなどのインターフェースをウィンドウに追加する */
 		f.add(clearButton);
 		f.add(objcountLabel);
@@ -100,8 +107,11 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		f.add(greenField);
 		f.add(blueLabel);
 		f.add(blueField);
+		f.add(circleCheckbox);
+		f.add(rectCheckbox);
 
 		f.btnEvent(); //ボタン入力に応じた処理を行うメソッドを呼び出す．
+		f.checkEvent(); //チェックボックスに応じた処理を行うメソッドを呼び出す
 		f.labelUpdate(); //ラベルの内容を変更するメソッドを呼び出す．
 
 		objcountField.setText(Integer.valueOf(drawCnt).toString()); //最大表示数を変数の初期値に設定する．入力フォームはString型のみ対応なので，String->int変換も行う．
@@ -114,7 +124,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		f.setVisible(true);
 	}
 	
-	/* ボタンとチェックボックスの入力に応じた処理を定義するメソッドである． */
+	/* ボタンの入力に応じた処理を定義するメソッド． */
 	void btnEvent() {
 		clearButton.addActionListener(new ActionListener() { //Clearボタンの処理．
 			@Override public void actionPerformed(ActionEvent e) {
@@ -147,7 +157,9 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 				repaint();
 			}
 		});
-
+	}
+	
+	void checkEvent() {
 		staticsizeCheckbox.addItemListener(new ItemListener() {  //サイズ指定モードの処理，
 			public void itemStateChanged(ItemEvent e) {               
 				sizeChange = false; //課題2.モードではない事を表すため，falseを代入する．
@@ -158,6 +170,17 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 				sizeChange = true; //課題2.モードを表すtrueを代入する．
 			}  
 		});
+		circleCheckbox.addItemListener(new ItemListener() {  //円モードの処理，
+			public void itemStateChanged(ItemEvent e) {               
+				objRect = false; //円を表すfalseを代入する．
+			}  
+		});  
+		rectCheckbox.addItemListener(new ItemListener() {  //四角形モードの処理．
+			public void itemStateChanged(ItemEvent e) {               
+				objRect = true; //四角形を表すtrueを代入する．
+			}  
+		});
+		
 	}
 	
 	/* ラベルの内容を変更するメソッド */
@@ -178,6 +201,8 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 			color = new Color(Red, Green, Blue); //RGBに入力された数が 0 <= RGB <= 255 を満たしていれば，colorに代入する．
 		}
 	}
+	
+	
 	
 	
 	/*--- ここまでコメント付けた ---*/
@@ -206,19 +231,21 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		y = e.getY();
 
 		/* GUIで選択されたサイズ変更モードに応じた処理を行う */
-		if(sizeChange == false) { //サイズ指定モードが選択されている時の処理．
-			obj = new Circle(objSize,color); //GUIで入力された色と大きさを指定し，新しい図形を描画する．
-		} else { //サイズ指定モードが選択されている時の処理．
+		if(sizeChange == true) { //サイズ指定モードが選択されている時の処理．
 			if (sizeBig == false) { //sizeBigがfalseのとき，大きさを10pxにしてsizeBigを反転する．
-				obj = new Circle(10,color);
+				objSize = 10;
 				sizeBig = !sizeBig;
 			} else { //sizeBigがtrueのとき，大きさを50pxにしてsizeBigを反転する．
-				obj = new Circle(50,color);
+				objSize = 50;
 				sizeBig = !sizeBig;
 			}
 		}
-
-
+		
+		if(objRect == true) { //objRectがtrueのとき，四角形で図形を描画する．
+			obj = new Rectangle(objSize,color); //描画の際，GUIで指定されたobjSizeとcolorを用いる．
+		} else { //objRectがfalseのとき，円で図形を描画する
+			obj = new Circle(objSize,color); //描画の際，GUIで指定されたobjSizeとcolorを用いる．
+		}
 
 		obj.moveto(x, y);
 		repaint();
@@ -229,20 +256,19 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		obj.moveto(x,y);
 		objList.add(obj);
 		obj = null;
-		if(objList.size() > drawCnt) {
-			objList.remove(0);// 引数で指定された数を超えた分remove
-			lineList.remove(0);
+		if(objList.size() > drawCnt) { //描画されている図形が指定された数を超えた際の処理．
+			objList.remove(0); //リストの先頭の図形を削除．
+			lineList.remove(0); //リストの先頭の線を削除．
 		}
 
-		if(objList.size()-1 > 0) {
-			obj = new Line(objList.get(objList.size()-2),objList.get(objList.size()-1));// 前に追加された図と今追加された図の座標の間に線を引く
+		if(objList.size() >= 2) { //図形が二つ以上ある時の処理
+			obj = new Line(objList.get(objList.size()-2),objList.get(objList.size()-1));// 前に追加された図と今追加された図の座標の間に線を引く．
 			lineList.add(obj);
 			obj = null;
 		}
 
-		System.out.println(objList.size());
-		labelUpdate();
-		System.out.println();
+		System.out.println(objList.size()); //コンソールに描画されている図形の数を表示．
+		labelUpdate(); //ラベルをアップデート．
 		repaint();
 	}
 	@Override public void mouseClicked(MouseEvent e) {}
