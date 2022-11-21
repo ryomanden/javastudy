@@ -5,7 +5,7 @@ public class Coord {
 	Coord(){
 		x = y = 0;
 	}
-	Coord(int x , int y){
+	Coord(int x , int y){ //引数で座標x,yを受け取り，ローカル変数に代入する
 		this.x = x;
 		this.y = y;
 	}
