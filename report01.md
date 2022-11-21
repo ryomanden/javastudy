@@ -363,17 +363,72 @@ public class Rectangle extends Figure {
 	}
 	@Override public void paint(Graphics g) {
 		g.setColor(color);
-		g.drawRect(x - size/2, y - size/2, size, size);
+		g.drawRect(x - size/2, y - size/2, size, size); //四角形を生成する．
 		
 	}
 }
 ```
 
-<!--- Line class --->
+以下は線を生成する`Line`クラスである．`Circle`クラスを参考に記述した．
 
-<!--- Coord class --->
+```java : Line.java
+package report;
 
-<!--- Figure class --->
+import java.awt.*;
+
+public class Line extends Figure { //Figureクラスを継承し，Lineクラスを作成する．
+	Color color;
+	Coord startPoint, endPoint; //線の開始・終了位置を入れるCoord型のインスタンスを作成．
+	
+	Line(Coord startPoint,Coord endPoint) { //第一引数で線の開始位置，第二引数で線の終了位置を受け取る．
+		this.color = new Color(0,0,0); //色を黒に設定．
+		this.startPoint = startPoint; //受け取った開始位置を８行目で作成したインスタンスに代入．
+		this.endPoint = endPoint; //受け取った終了位置を８行目で作成したインスタンスに代入．
+	}
+	@Override public void paint(Graphics g) {
+		g.setColor(color);
+		g.drawLine(startPoint.x,startPoint.y,endPoint.x,endPoint.y); //開始位置から終了位置まで線を引く
+	}
+}
+```
+
+```java : Coord.java
+package report;
+
+public class Coord {
+	int x, y;
+	Coord(){
+		x = y = 0;
+	}
+	Coord(int x , int y){
+		this.x = x;
+		this.y = y;
+	}
+	public void move(int dx, int dy) {
+		x += dx;
+		y += dy;
+	}
+	public void moveto(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+}
+```
+
+```java : Figure.java
+package report;
+
+import java.awt.Graphics;
+
+public class Figure extends Coord {
+	int color;
+	Figure(){
+		color = 0;
+	}
+	public void paint(Graphics g) {
+	}
+}
+```
 
 ## 5. 動作検証，および実行環境
 
@@ -399,8 +454,8 @@ public class Rectangle extends Figure {
 
 本プログラムの制作，および動作の検証は以下の環境で行なった．
 
-| Device | Macbook Air                  |
-| ---: | :--------------------------- |
+| Device | Macbook Air |
+| ---: | :--- |
 | OS   | MacOS Ventura Version 13.0.1 |
 | CPU  | Apple M1 |
 | Memory | 16GB |
@@ -409,21 +464,25 @@ public class Rectangle extends Figure {
 
 ## 6.実行結果
 
-### 1.値の変更をせずに実行した結果は以下の図の通りである．
+### 検証1.
 
 | | |
 | :---: | :---: |
 | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-21 at 23.53.41.png)  *図１：図形を３０個描画．* | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-21 at 23.53.47.png)*図２：図形を３１個描画．* |
 | | |
 
-### 2.[`Change size`]選択時の実行結果は以下の通りである．
+図１，図２のように，値に変更を加えず実行した場合には３０個を超えて図形が描画されることはない．
+
+### 検証2.
 
 | |
 | :---:|
 | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.24.06.png) *図３；[Change Size]を選択し，実行．*|
 | |
 
-### 3.任意の色を指定した際の実行結果は以下の通りである．
+図３のように，\[Change Size]を選択し実行すると，10px・50pxと交互にサイズを変えて描画された．
+
+### 検証3.
 
 | | |
 | :---:| :---:|
@@ -431,43 +490,56 @@ public class Rectangle extends Figure {
 | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.32.03.png)*図６：Bを`255`で実行．* | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.33.06.png)*図７：Rを`255`，Gを`200`，Bを`0`で実行* |
 | | |
 
-### 4.
+図４，図５，図６，図７ののように，赤，緑，青をそれぞれ256段階で調整できた．
+
+### 検証4.
 
 |                                                              |                                                              |
 | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.51.41.png)*図８：* | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.51.45.png)*図９：* |
+| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.51.41.png)*図８：図形を何も描画しない状態．* | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.51.45.png)*図９：図形を３つ描画．* |
 |                                                              |                                                              |
 
-### 5.
+図８，図９のように，`ObjectCount`の数値が描画されている図形に応じて変わった．
 
-|                                                              |                                                              |
-| :----------------------------------------------------------: | :----------------------------------------------------------: |
-| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.58.56.png)*図１０：* | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.59.01.png)*図１１：* |
-|                                                              |                                                              |
-
-### 6.
+### 検証5.
 
 |                                                              |                                                              |
 | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.02.24.png)*図１２：* | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.02.29.png)*図１３：* |
+| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.58.56.png)*図１０：図形を複数個描画した．* | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.59.01.png)*図１１：\[Clear]を押した．* |
 |                                                              |                                                              |
 
-### 7.
+図１０，図１１のように，\[Clear]を押すことで描画されている図形を削除できた．
+
+### 検証6.
 
 |                                                              |                                                              |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.07.15.png)** | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.07.25.png)** |
-| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.07.39.png)** | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.07.48.png)** |
+| :----------------------------------------------------------: | :----------------------------------------------------------: |
+| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.02.24.png)*図１２：最大描画数を`15`に設定し，図形を15個描画．* | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.02.29.png)*図１３：同設定で図形を16個描画．* |
 |                                                              |                                                              |
 
+図１２，図１３のように，`MaxObjectCount`で指定した描画数を超えて描画されることはない．
 
+### 検証7.
 
-### 8.\[`Rectangle`]選択時の実行結果は以下の通りである．
+|                                                              |                                                              |
+| :----------------------------------------------------------: | :----------------------------------------------------------: |
+| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.07.15.png)*図１４：大きさ50pxで実行．* | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.07.25.png)*図１５：大きさ20pxで実行．* |
+| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.07.39.png)*図１６：大きさ80pxで実行．* | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.07.48.png)*図１７：大きさ0pxで実行．* |
+|                                                              |                                                              |
+
+図１４，図１５，図１６，図１７のように，指定した大きさで図形が描画される．また，0pxでは図形は何も描画されない．
+
+### 検証8.
 
 | | |
-| :---: | ----- |
-| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.46.49.png)*図NaN：* | |
+| :---: | :---: |
+| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.46.49.png)*図１８：\[Rectangle]を選択し図形を描画．* | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.43.04.png)*図１９：\[Change Size]で図形を６個描画->10pxで６個描画* |
+| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.43.49.png)*図２０：Rを`255`に設定し，大きさを50px->0px->Change Sizeと変更し描画．* | |
 | | |
+
+図１８のように，\[Rectangle]を選択することで四角形を描画できた．
+
+図１９，図２０のように，\[Circle]選択時と\[Rectangle]選択時とでは図形の形以外に動作の違いはなかった．
 
 ## 6. 感想
 
