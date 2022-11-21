@@ -41,8 +41,10 @@ import java.util.ArrayList;
 [link]()
 
 <img src="/Volumes/GoogleDrive/My Drive/IMG_7401_Original.JPG" alt="image" style="zoom:25%;" />
+*image*
 
-
+<img src="/Volumes/GoogleDrive/My Drive/IMG_7401_Original.JPG" style="zoom:25%;" />
+*image*
 
 **Bold**
 
@@ -56,14 +58,16 @@ import java.util.ArrayList;
 
 chusyaku[^\*1]
 
-
+| TH 左寄せ | TH 中央寄せ | TH 右寄せ |
+| :--- | :---: | ---: |
+| TD | TD | TD |
+| TD | TD | TD |
 
 Arrow -> arrow
 
 
 
 [^\*1]: korega google des https://google.com
-
 
 
 # 見出し

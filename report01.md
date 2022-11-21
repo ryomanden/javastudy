@@ -377,9 +377,25 @@ public class Rectangle extends Figure {
 
 <!--- Figure class --->
 
-## 5. 動作検証
+## 5. 動作検証，および実行環境
+
+|      | Macbook Air                  |
+| ---: | :--------------------------- |
+| OS   | MacOS Ventura Version 13.0.1 |
+| CPU  | Apple M1 |
+| Memory | 16GB |
+| Java version | Java17 |
+| eclipse version | 2022-09 (4.25.0) |
 
 
+
+
+
+## 6.実行結果
+
+<img src="/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-21 at 18.23.09.png" alt="Screenshot 2022-11-21 at 18.23.09" style="zoom:25%;" />
+
+<div style="text-align:center"><i>図１：</i></div>
 
 ## 6. 感想
 
