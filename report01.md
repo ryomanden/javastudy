@@ -371,8 +371,6 @@ public class Rectangle extends Figure {
 
 <!--- Line class --->
 
-
-
 <!--- Coord class --->
 
 <!--- Figure class --->
@@ -381,17 +379,23 @@ public class Rectangle extends Figure {
 
 動作の検証にあたり，下記条件の通り動作する場合にのみ正常動作とみなす．
 
-1. アプリケーションを起動し，何も変更しない状態で図形が３０個以上描画されない．
-2. [Change size]チェックボックスを選択し，図形が10px，50pxと交互に切り替わる．
-3. \[R]\[G]\[B]に0~255の適当な数値を入力し，\[apply]ボタンを押した後に描画した図形の色が変わる．なお，３つの値が0に近いほど黒に近くなるため，入力する値が小さいと変化がわかりにくい場合があるが，正常である．
-4. 図形を２個以上描画し，図形の間に線が描かれる．
-5. \[Rectangle]チェックボックスを選択し，四角形が描画される．また，上記全ての条件で円と同様に描画される．
-6. 線を除く，現在描画されている図形の数が`ObjectCount is 図形の数`の形式でGUI上に表示される．
-7. \[Clear]ボタンを押し，描画されていた全ての図形が削除される．
-8. \[MaxObjectCount]に１以上の適当な数値を入力し\[Apply]ボタンを押すと，描かれる図形の最大数が指定した数以上描画されない．
-9. \[Static size]チェックボックを選択し\[+]\[-]ボタンを押した際，図形の大きさが10pxずつ増減する．また，現在のサイズが`Size 図形の大きさ`の形式で表示される．なお，図形の大きさは常に0pxを下回らない．
+1. アプリケーションを起動し，何も変更しない状態で図形が30個以上描画されない．また，図形を２個以上描画し，図形の間に線が描かれる．
 
+2. [`Change size`]チェックボックスを選択し，図形が10px，50pxと交互に切り替わる．
 
+3. \[`R`]\[`G`]\[`B`]に`0~255`の適当な数値を入力し，\[`apply`]ボタンを押した後に描画した図形の色が変わる．なお，３つの値が0に近いほど黒に近くなるため，入力する値が小さいと変化がわかりにくい場合があるが，正常である．
+
+4. 線を除く，現在描画されている図形の数が*`ObjectCount is 図形の数`*の形式でGUI上に表示される．
+
+5. \[`Clear`]ボタンを押し，描画されていた全ての図形が削除される．
+
+6. \[`MaxObjectCoun`t]に１以上の適当な数値を入力し`\[Apply`]ボタンを押すと，描かれる図形の最大数が指定した数以上描画されない．
+
+7. \[`Static size`]チェックボックを選択し\[`+`]\[`-`]ボタンを押した際，図形の大きさが10pxずつ増減する．また，現在のサイズが*`Size 図形の大きさ`*の形式で表示される．なお，図形の大きさは常に0pxを下回らない．
+
+8. \[`Rectangle`]チェックボックスを選択し，四角形が描画される．また，上記全ての条件で円と同様に描画される．
+
+   
 
 本プログラムの制作，および動作の検証は以下の環境で行なった．
 
@@ -404,13 +408,66 @@ public class Rectangle extends Figure {
 | eclipse version | 2022-09 (4.25.0) |
 
 ## 6.実行結果
-<!--- ここに --->
-<img src="/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-21 at 23.53.41.png" style="zoom:25%;" />
 
-<div style="text-align:center"><i>図１： 図形を30個描画．</i></div>
+### 1.値の変更をせずに実行した結果は以下の図の通りである．
 
-![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-21 at 23.53.47.png)
-<div style="text-align:center"><i>図２：図形を31個描画．</i></div>
+| | |
+| :---: | :---: |
+| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-21 at 23.53.41.png)  *図１：図形を３０個描画．* | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-21 at 23.53.47.png)*図２：図形を３１個描画．* |
+| | |
+
+### 2.[`Change size`]選択時の実行結果は以下の通りである．
+
+| |
+| :---:|
+| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.24.06.png) *図３；[Change Size]を選択し，実行．*|
+| |
+
+### 3.任意の色を指定した際の実行結果は以下の通りである．
+
+| | |
+| :---:| :---:|
+| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.31.39.png) *図４：Rを`255`で実行．* | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.31.52.png)*図５：Gを`255`で実行．* |
+| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.32.03.png)*図６：Bを`255`で実行．* | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.33.06.png)*図７：Rを`255`，Gを`200`，Bを`0`で実行* |
+| | |
+
+### 4.
+
+|                                                              |                                                              |
+| :----------------------------------------------------------: | :----------------------------------------------------------: |
+| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.51.41.png)*図８：* | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.51.45.png)*図９：* |
+|                                                              |                                                              |
+
+### 5.
+
+|                                                              |                                                              |
+| :----------------------------------------------------------: | :----------------------------------------------------------: |
+| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.58.56.png)*図１０：* | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.59.01.png)*図１１：* |
+|                                                              |                                                              |
+
+### 6.
+
+|                                                              |                                                              |
+| :----------------------------------------------------------: | :----------------------------------------------------------: |
+| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.02.24.png)*図１２：* | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.02.29.png)*図１３：* |
+|                                                              |                                                              |
+
+### 7.
+
+|                                                              |                                                              |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.07.15.png)** | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.07.25.png)** |
+| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.07.39.png)** | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.07.48.png)** |
+|                                                              |                                                              |
+
+
+
+### 8.\[`Rectangle`]選択時の実行結果は以下の通りである．
+
+| | |
+| :---: | ----- |
+| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.46.49.png)*図NaN：* | |
+| | |
 
 ## 6. 感想
 
