@@ -316,7 +316,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 }
 ```
 
-<!--- Circle class --->
+以下は円を生成する`Circle`クラスである．
 
 ```java : Circle.java
 package report;
@@ -342,7 +342,7 @@ public class Circle extends Figure {
 }
 ```
 
-<!--- Rectangle class --->
+以下は四角形を生成する`Rectangle`クラスである．`Circle`クラスを参考に記述した．
 
 ```java : Rectangle.java
 package report;
@@ -379,6 +379,8 @@ public class Rectangle extends Figure {
 
 ## 5. 動作検証
 
+
+
 ## 6. 感想
 
-ボタン等を実装するのにあたり調査したところ，awt・swing・JavaFXといったGUIに関するフレームワークがあることが分かった．awt以外のフレームワークでは今回のプログラムとの相性が悪いようだったため，swingとJavaFXの使用は見送ったが，実際にJavaでアプリケーションを構築する場合にはawtでは不十分であると実感した．アプリケーションを構築する際，フレームワーク同士の相性なども考慮し，事前に目標の動作とそれに必要なライブラリを検討しておかなければ，開発途中でフレームワークを選びなおさなくてはいけなくなることがあると分かった．
+ボタン等を実装するにあたり調査したところ，awt・swing・JavaFXといったGUIに関するフレームワークがあることが分かった．awt以外のフレームワークでは今回のプログラムとの相性が悪いようだったため，swingとJavaFXの使用は見送ったが，実際にJavaでアプリケーションを構築する場合にはawtでは不十分であると実感した．アプリケーションを構築する際，フレームワーク同士の相性なども考慮し，事前に目標の動作とそれに必要なライブラリを検討しておかなければ，開発途中でフレームワークを選びなおさなくてはいけなくなる場合があると分かった．
