@@ -202,11 +202,6 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		}
 	}
 	
-	
-	
-	
-	/*--- ここまでコメント付けた ---*/
-	
 	PaintReport(){
 		objList = new ArrayList<Figure>();
 		lineList = new ArrayList<Figure>();
