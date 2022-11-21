@@ -194,8 +194,8 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 			f = objList.get(i);
 			f.paint(g);
 		}
-		for(int i = 0; i < lineList.size(); i++) {
-
+		
+		for(int i = 0; i < lineList.size(); i++) { //lineListに保存された線を描画する．
 			f = lineList.get(i);
 			f.paint(g);
 		}
@@ -205,13 +205,14 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		x = e.getX();
 		y = e.getY();
 
-		if(sizeChange == false) {
-			obj = new Circle(objSize,color);
-		} else {
-			if (sizeBig == false) {
+		/* GUIで選択されたサイズ変更モードに応じた処理を行う */
+		if(sizeChange == false) { //サイズ指定モードが選択されている時の処理．
+			obj = new Circle(objSize,color); //GUIで入力された色と大きさを指定し，新しい図形を描画する．
+		} else { //サイズ指定モードが選択されている時の処理．
+			if (sizeBig == false) { //sizeBigがfalseのとき，大きさを10pxにしてsizeBigを反転する．
 				obj = new Circle(10,color);
 				sizeBig = !sizeBig;
-			} else {
+			} else { //sizeBigがtrueのとき，大きさを50pxにしてsizeBigを反転する．
 				obj = new Circle(50,color);
 				sizeBig = !sizeBig;
 			}
