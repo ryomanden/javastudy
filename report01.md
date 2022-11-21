@@ -7,8 +7,9 @@ author:Ryo Mitsuda
 <div style="text-align:right;font-size:0.8em;color:var(--theme-400);">
 満田 瞭<br>
 2132134番<br>
-11月19日
+11月22日
 </div>
+
 
 
 # 第1回レポート
@@ -31,7 +32,14 @@ author:Ryo Mitsuda
 10. 4.で実装した機能を改変し，GUI上で任意の色を指定できるようにする.
 
 ## 3. 理論
-<!--- ここに理論 --->
+1. `java.awt.button`クラス．ボタンの生成などを行う．
+2. `java.awt.Label`クラス.GUI上にテキストを表示させるために用いる．
+3. `java.awt.TextField`クラス．テキスト入力欄の生成や受け取りに用いる．
+4. `java.awt.Checkbox`クラス．チェックボックスの生成などを行う．
+5. `java.awt.CheckboxGroup`クラス．生成したチェックボックスを追加することで，ラジオボタンとして扱える．
+6. `java.awt.event.ActionListener`インタフェース．ボタンの入力を受け取る．
+7. `java.awt.event.ItemListener`インタフェース．チェックボックスの入力を受け取る．
+8. `java.awt.Color`クラス．色の情報を格納する際などに用いる．
 
 ## 4. プログラム
 パッケージ内の構成，および実行に係るファイルの階層は以下の通りである．
@@ -431,27 +439,21 @@ public class Figure extends Coord {
 }
 ```
 
+<div style="page-break-after:always;color:lightgray" class="no-print">─────改ページ─────</div>
+
 ## 5. 動作検証，および実行環境
 
 動作の検証にあたり，下記条件の通り動作する場合にのみ正常動作とみなす．
 
 1. アプリケーションを起動し，何も変更しない状態で図形が30個以上描画されない．また，図形を２個以上描画し，図形の間に線が描かれる．
-
 2. [`Change size`]チェックボックスを選択し，図形が10px，50pxと交互に切り替わる．
-
 3. \[`R`]\[`G`]\[`B`]に`0~255`の適当な数値を入力し，\[`apply`]ボタンを押した後に描画した図形の色が変わる．なお，３つの値が0に近いほど黒に近くなるため，入力する値が小さいと変化がわかりにくい場合があるが，正常である．
-
 4. 線を除く，現在描画されている図形の数が*`ObjectCount is 図形の数`*の形式でGUI上に表示される．
-
 5. \[`Clear`]ボタンを押し，描画されていた全ての図形が削除される．
-
 6. \[`MaxObjectCoun`t]に１以上の適当な数値を入力し`\[Apply`]ボタンを押すと，描かれる図形の最大数が指定した数以上描画されない．
-
 7. \[`Static size`]チェックボックを選択し\[`+`]\[`-`]ボタンを押した際，図形の大きさが10pxずつ増減する．また，現在のサイズが*`Size 図形の大きさ`*の形式で表示される．なお，図形の大きさは常に0pxを下回らない．
-
 8. \[`Rectangle`]チェックボックスを選択し，四角形が描画される．また，上記全ての条件で円と同様に描画される．
 
-   
 
 本プログラムの制作，および動作の検証は以下の環境で行なった．
 
@@ -467,10 +469,10 @@ public class Figure extends Coord {
 
 ### 検証1.
 
-| | |
+|  | |
 | :---: | :---: |
-| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-21 at 23.53.41.png)  *図１：図形を３０個描画．* | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-21 at 23.53.47.png)*図２：図形を３１個描画．* |
-| | |
+| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-21 at 23.53.41.png)  <div style="font-size:0.8rem"><i>図１：図形を３０個描画．</i></div> | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-21 at 23.53.47.png)<div style="font-size:0.8rem"><i>図２：図形を３１個描画．</i></div> |
+|  |  |
 
 図１，図２のように，値に変更を加えず実行した場合には３０個を超えて図形が描画されることはない．
 
@@ -478,8 +480,8 @@ public class Figure extends Coord {
 
 | |
 | :---:|
-| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.24.06.png) *図３；[Change Size]を選択し，実行．*|
-| |
+| <img src="/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.24.06.png" style="width:50%;" /><div style="font-size:0.8rem"><i>図３；[Change Size]を選択し，実行．</i></div> |
+|  |
 
 図３のように，\[Change Size]を選択し実行すると，10px・50pxと交互にサイズを変えて描画された．
 
@@ -487,17 +489,19 @@ public class Figure extends Coord {
 
 | | |
 | :---:| :---:|
-| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.31.39.png) *図４：Rを`255`で実行．* | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.31.52.png)*図５：Gを`255`で実行．* |
-| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.32.03.png)*図６：Bを`255`で実行．* | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.33.06.png)*図７：Rを`255`，Gを`200`，Bを`0`で実行* |
+| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.31.39.png) <div style="font-size:0.8rem"><i>図４：Rを`255`で実行．</i></div> | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.31.52.png)<div style="font-size:0.8rem"><i>図５：Gを`255`で実行．</i></div> |
+| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.32.03.png)<div style="font-size:0.8rem"><i>図６：Bを`255`で実行．</i></div> | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.33.06.png)<div style="font-size:0.8rem"><i>図７：Rを`255`，Gを`200`，Bを`0`で実行</i></div> |
 | | |
 
 図４，図５，図６，図７ののように，赤，緑，青をそれぞれ256段階で調整できた．
+
+<div style="page-break-after:always;color:lightgray" class="no-print">─────改ページ─────</div>
 
 ### 検証4.
 
 |                                                              |                                                              |
 | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.51.41.png)*図８：図形を何も描画しない状態．* | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.51.45.png)*図９：図形を３つ描画．* |
+| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.51.41.png)<div style="font-size:0.8rem"><i>図８：図形を何も描画しない状態．</i></div> | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.51.45.png)<div style="font-size:0.8rem"><i>図９：図形を３つ描画．</i></div> |
 |                                                              |                                                              |
 
 図８，図９のように，`ObjectCount`の数値が描画されている図形に応じて変わった．
@@ -506,42 +510,54 @@ public class Figure extends Coord {
 
 |                                                              |                                                              |
 | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.58.56.png)*図１０：図形を複数個描画した．* | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.59.01.png)*図１１：\[Clear]を押した．* |
+| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.58.56.png)<div style="font-size:0.8rem"><i>図１０：図形を複数個描画した．</i></div> | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.59.01.png)<div style="font-size:0.8rem"><i>図１１：\[Clear]を押した．</i></div> |
 |                                                              |                                                              |
 
 図１０，図１１のように，\[Clear]を押すことで描画されている図形を削除できた．
+
+<div style="page-break-after:always;color:lightgray" class="no-print">─────改ページ─────</div>
 
 ### 検証6.
 
 |                                                              |                                                              |
 | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.02.24.png)*図１２：最大描画数を`15`に設定し，図形を15個描画．* | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.02.29.png)*図１３：同設定で図形を16個描画．* |
+| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.02.24.png)<div style="font-size:0.8rem"><i>図１２：最大描画数を`15`に設定し，図形を15個描画．</i></div> | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.02.29.png)<div style="font-size:0.8rem"><i>図１３：同設定で図形を16個描画．</i></div> |
 |                                                              |                                                              |
 
 図１２，図１３のように，`MaxObjectCount`で指定した描画数を超えて描画されることはない．
+
+<div style="page-break-after:always;color:lightgray" class="no-print">─────改ページ─────</div>
 
 ### 検証7.
 
 |                                                              |                                                              |
 | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.07.15.png)*図１４：大きさ50pxで実行．* | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.07.25.png)*図１５：大きさ20pxで実行．* |
-| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.07.39.png)*図１６：大きさ80pxで実行．* | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.07.48.png)*図１７：大きさ0pxで実行．* |
+| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.07.15.png)<div style="font-size:0.8rem"><i>図１４：大きさ50pxで実行．</i></div> | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.07.25.png)<div style="font-size:0.8rem"><i>図１５：大きさ20pxで実行．</i></div> |
+| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.07.39.png)<div style="font-size:0.8rem"><i>図１６：大きさ80pxで実行．</i></div> | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.07.48.png)<div style="font-size:0.8rem"><i>図１７：大きさ0pxで実行．</i></div> |
 |                                                              |                                                              |
 
 図１４，図１５，図１６，図１７のように，指定した大きさで図形が描画される．また，0pxでは図形は何も描画されない．
+
+<div style="page-break-after:always;color:lightgray" class="no-print">─────改ページ─────</div>
 
 ### 検証8.
 
 | | |
 | :---: | :---: |
-| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.46.49.png)*図１８：\[Rectangle]を選択し図形を描画．* | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.43.04.png)*図１９：\[Change Size]で図形を６個描画->10pxで６個描画* |
-| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.43.49.png)*図２０：Rを`255`に設定し，大きさを50px->0px->Change Sizeと変更し描画．* | |
+| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.46.49.png)<div style="font-size:0.8rem"><i>図１８：\[Rectangle]を選択し図形を描画．</i></div> | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.43.04.png)<div style="font-size:0.8rem"><i>図１９：\[Change Size]で図形を６個描画->10pxで６個描画</i></div> |
+| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.43.49.png)<div style="font-size:0.8rem"><i>図２０：Rを`255`に設定し，大きさを50px->0px->Change Sizeと変更し描画．</i></div> | |
 | | |
 
 図１８のように，\[Rectangle]を選択することで四角形を描画できた．
-
 図１９，図２０のように，\[Circle]選択時と\[Rectangle]選択時とでは図形の形以外に動作の違いはなかった．
 
-## 6. 感想
+<div style="page-break-after:always;color:lightgray" class="no-print">─────改ページ─────</div>
+
+## 7.まとめ
+
+インスタンス・クラス・メソッドなどのオブジェクト指向言語特有の記述を用いてプログラムの制作を行い，その特徴を学んだ．
+目標とするアプリケーションの制作には成功したものの，オブジェクト指向言語の特徴を活かした最も効率的なプログラムを制作することは今後の課題であると感じる．
+
+## 8. 感想
 
 ボタン等を実装するにあたり調査したところ，awt・swing・JavaFXといったGUIに関するフレームワークがあることが分かった．awt以外のフレームワークでは今回のプログラムとの相性が悪いようだったため，swingとJavaFXの使用は見送ったが，実際にJavaでアプリケーションを構築する場合にはawtでは不十分であると実感した．アプリケーションを構築する際，フレームワーク同士の相性なども考慮し，事前に目標の動作とそれに必要なライブラリを検討しておかなければ，開発途中でフレームワークを選びなおさなくてはいけなくなる場合があると分かった．
