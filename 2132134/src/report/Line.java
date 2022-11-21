@@ -12,9 +12,6 @@ public class Line extends Figure {
 		this.startPoint = startPoint;
 		this.endPoint = endPoint;
 	}
-	Line(Color color) {
-		this.color = color;
-	}
 	@Override public void paint(Graphics g) {
 		g.setColor(color);
 		g.drawLine(startPoint.x,startPoint.y,endPoint.x,endPoint.y);
