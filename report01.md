@@ -391,7 +391,7 @@ public class Line extends Figure { //Figureクラスを継承し，Lineクラス
 	}
 }
 ```
-
+以下はポジションに関するクラス`Coord`である．
 ```java : Coord.java
 package report;
 
@@ -400,7 +400,7 @@ public class Coord {
 	Coord(){
 		x = y = 0;
 	}
-	Coord(int x , int y){
+	Coord(int x , int y){ //引数で座標x,yを受け取り，ローカル変数に代入する
 		this.x = x;
 		this.y = y;
 	}
@@ -415,6 +415,7 @@ public class Coord {
 }
 ```
 
+以下は`Figure`クラスである．配布プログラムから変更は加えていない．
 ```java : Figure.java
 package report;
 
