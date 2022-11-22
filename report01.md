@@ -4,13 +4,11 @@ header:ネットワークプログラミング応用 - 第1回レポート
 author:Ryo Mitsuda
 ---
 
-<div style="text-align:right;font-size:0.9em;color:var(--theme-500);">
+<div style="text-align:right;font-size:0.8em;color:var(--theme-500);">
 情報ネットワーク学科<br>
 2132134番<br>
 満田 瞭<br>
 </div>
-
-
 
 # 第1回レポート
 
@@ -33,6 +31,8 @@ author:Ryo Mitsuda
 8. 2.で実装した機能を改変し，GUI上で任意の描画数を指定できるようにする．
 9. 3.で実装した機能を改変し，GUI上で任意の描画サイズを指定できるようにする．
 10. 4.で実装した機能を改変し，GUI上で任意の色を指定できるようにする.
+
+<div style="page-break-after:always;color:lightgray" class="no-print">─────改ページ─────</div>
 
 ## 3. 理論
 
@@ -59,6 +59,8 @@ report
 ├── PaintReport.java
 └── Rectangle.java
 ```
+
+<div style="page-break-after:always;color:lightgray" class="no-print">─────改ページ─────</div>
 
 以下はウィンドウへの描画を行うメインのクラス`PaintReport`である．提示した課題の実装箇所はソースコード内にコメント形式で記述する．なお，特にコメントの記述がない場合は，配布プログラムから変更を加えていない．
 
