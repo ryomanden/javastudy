@@ -6,7 +6,11 @@ import java.awt.Graphics;
 public class Circle extends Figure {
 	int size;
 	Color color;
+
 	
+	Circle() {
+		size = 10;
+	}	
 	Circle(int size) { //第二引数が指定されなかった場合，黒で円を生成する．
 		this.size = size;
 		this.color = new Color(0,0,0);

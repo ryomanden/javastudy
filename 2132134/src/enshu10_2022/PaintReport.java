@@ -52,7 +52,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 	static Checkbox rectCheckbox = new Checkbox("Rectangle",cbg2, false); //四角形モードを有効にするチェックボックス
 
 	static int drawCnt = 30; //最大図形表示数を指定する変数．
-	static Color color = new Color(0,0,0); //図形色を指定するColorインスタンス変数．
+	static Color color = new Color(0,0,0); //図形色を指定するColorインスタンス変数
 	
 	public static void main(String[] args) {
 		PaintReport f = new PaintReport();
@@ -122,6 +122,11 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		blueField.setText("0");
 
 		f.setVisible(true);
+		Circle c = new Circle();
+		Circle d = c;
+		c.x = 100;
+		System.out.println("c.x =  " +c.x);
+		System.out.println("d.x =  " +d.x);
 	}
 	
 	/* ボタンの入力に応じた処理を定義するメソッド． */
