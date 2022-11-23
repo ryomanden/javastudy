@@ -122,6 +122,8 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 		blueField.setText("0");
 
 		f.setVisible(true);
+		
+		/* kadai X */
 		Circle c = new Circle();
 		Circle d = c;
 		c.x = 100;
