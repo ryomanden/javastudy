@@ -1,6 +1,8 @@
 package enshu10_2022;
 
-public class Coord {
+import java.io.Serializable;
+
+public class Coord implements Serializable{
 	int x, y;
 	Coord(){
 		x = y = 0;
