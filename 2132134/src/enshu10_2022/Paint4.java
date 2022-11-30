@@ -3,15 +3,20 @@ package enshu10_2022;
 import java.awt.Button;
 import java.awt.Checkbox;
 import java.awt.CheckboxGroup;
+import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -19,7 +24,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-public class Paint4 extends Frame implements MouseListener, MouseMotionListener,ActionListener {
+public class Paint4 extends Frame implements MouseListener, MouseMotionListener,ActionListener, WindowFocusListener ,ComponentListener{
 	int x, y;
 	
 	ArrayList<enshu10_2022.Figure> objList;
@@ -27,11 +32,18 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 	Checkbox c1, c2, c3 ,c4;
 	Button end;
 	int mode = 0;
-	enshu10_2022.Figure obj;	
+	enshu10_2022.Figure obj;
+	
+	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	static int width = screenSize.width;
+	static int height = screenSize.height;
+	
+	static toolbar toolbar = new toolbar();
 	
 	public static void main(String[] args) {
+		
 		Paint4 f = new Paint4();
-		f.setSize(640,480);
+		f.setBounds(width / 4, height / 4, 640, 480);
 		f.setTitle("Paint Sample");
 		f.addWindowListener(new WindowAdapter() {
 			@Override public void windowClosing(WindowEvent e) {
@@ -40,11 +52,15 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 		});
 		f.setVisible(true);
 		if(args .length == 1) f.load(args[0]);
+		toolbar.setBounds(width / 4 + 645, height / 4, 200, 480);
 	}
+	
 	Paint4(){
 		objList = new ArrayList<enshu10_2022.Figure>();
 		addMouseListener(this);
 		addMouseMotionListener(this);
+		addWindowFocusListener(this);//ウィンドウがアクティブか見る
+		addComponentListener(this);//ウィンドウのサイズ変更を見る
 		setLayout(null);
 		cbg = new CheckboxGroup();
 		c1 = new Checkbox("丸",cbg,true);
@@ -102,6 +118,7 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 		}
 		if(mode >= 1) obj.paint(g);
 	}
+	
 	
 	@Override public void actionPerformed(ActionEvent e) {
 		save("paint.dat");
@@ -162,5 +179,40 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 
 	}
 	@Override public void mouseMoved(MouseEvent e) {}
+
+	@Override
+	public void windowGainedFocus(WindowEvent e) {
+		toolbar.toFront();
+	}
+
+	@Override
+	public void windowLostFocus(WindowEvent e) {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
+
+	@Override
+	public void componentResized(ComponentEvent e) {
+		toolbar.setLocation(getX()+ getWidth() + 10, getY());
+		
+	}
+
+	@Override
+	public void componentMoved(ComponentEvent e) {
+		toolbar.setLocation(getX()+ getWidth() + 10, getY());
+		
+	}
+
+	@Override
+	public void componentShown(ComponentEvent e) {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
+
+	@Override
+	public void componentHidden(ComponentEvent e) {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
 	
 }
