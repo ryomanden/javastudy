@@ -1,5 +1,7 @@
 package enshu10_2022;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,14 +10,25 @@ import java.awt.event.MouseListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JToggleButton;
+import javax.swing.border.TitledBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 class toolbar extends JFrame implements MouseListener, ActionListener{
 	
-	private ButtonGroup btnGroup = new ButtonGroup();
+	private ButtonGroup objModeGroup = new ButtonGroup();
+	private JFileChooser file = new JFileChooser( "." );
 	
-	public toolbar() {
+	private Color selectColor = Color.black;
+	
+	Paint4 paint4 = null;
+	
+	public toolbar(Paint4 paint4) {
+		this.paint4 = paint4;
 		getContentPane().setLayout(new FlowLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//setUndecorated(true);
@@ -23,63 +36,154 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 		setTitle("Toolbar");
 		addMouseListener(this);
 		
+		file.setFileFilter(new FileNameExtensionFilter("PaintData(*.dat)","dat"));
+		
 
 		btnEvent();
 		setVisible(true);
 	}
 	public static void main(String [] args) {
-		new toolbar();
+		//new toolbar();
 	}
 	
 	void btnEvent() {
-		JToggleButton dotToggleButton = new JToggleButton("dot",true);
-		dotToggleButton.setActionCommand("dott");
-		btnGroup.add(dotToggleButton);
-		add(dotToggleButton);
+		Dimension btnSize = new Dimension(80,30);
+
+		JButton undoButton = new JButton("Undo");
+		undoButton.addActionListener(this);
+		undoButton.setPreferredSize(btnSize);
+		undoButton.setActionCommand("undo");
+		add(undoButton);
 		
-		JToggleButton lineToggleButton = new JToggleButton("line",false);
+		JButton redoButton = new JButton("Redo");
+		redoButton.addActionListener(this);
+		redoButton.setPreferredSize(btnSize);
+		redoButton.setActionCommand("redo");
+		add(redoButton);
+		
+		TitledBorder styleBorder = new TitledBorder("ObjectStyle");
+		JPanel panel1 = new JPanel();
+		panel1.setPreferredSize(new Dimension(180,100));
+		panel1.setBorder(styleBorder);
+		add(panel1);
+
+		TitledBorder toolBorder = new TitledBorder("");
+		JPanel panel2 = new JPanel();
+		panel2.setPreferredSize(new Dimension(180,120));
+		panel2.setBorder(toolBorder);
+		add(panel2);
+		
+		JToggleButton dotToggleButton = new JToggleButton("Dot",true);
+		dotToggleButton.setActionCommand("dott");
+		dotToggleButton.setPreferredSize(btnSize);
+		objModeGroup.add(dotToggleButton);
+		panel1.add(dotToggleButton);
+		
+		JToggleButton circleButton = new JToggleButton("Circle",false);
+		circleButton.setActionCommand("circle");
+		circleButton.setPreferredSize(btnSize);
+		objModeGroup.add(circleButton);
+		panel1.add(circleButton);
+
+		JToggleButton rectToggleButton = new JToggleButton("Rect",false);
+		rectToggleButton.setActionCommand("rect");
+		rectToggleButton.setPreferredSize(btnSize);
+		objModeGroup.add(rectToggleButton);
+		panel1.add(rectToggleButton);
+		
+		JToggleButton lineToggleButton = new JToggleButton("Line",false);
 		lineToggleButton.setActionCommand("line");
-		btnGroup.add(lineToggleButton);
-		add(lineToggleButton);
+		lineToggleButton.setPreferredSize(btnSize);
+		objModeGroup.add(lineToggleButton);
+		panel1.add(lineToggleButton);
+		
+		JButton colorButton = new JButton("Color");
+		colorButton.setActionCommand("color");
+		colorButton.addActionListener(this);
+		colorButton.setPreferredSize(btnSize);
+		panel2.add(colorButton);
 		
 		JButton clearButton = new JButton("Clear");
-		clearButton.addActionListener(this);
 		clearButton.setActionCommand("clear");
-		add(clearButton);
+		clearButton.addActionListener(this);
+		clearButton.setPreferredSize(btnSize);
+		panel2.add(clearButton);
+
+		JButton loadButton = new JButton("Load");
+		loadButton.addActionListener(this);
+		loadButton.setPreferredSize(btnSize);
+		loadButton.setActionCommand("load");
+		panel2.add(loadButton);
 
 		JButton saveButton = new JButton("Save");
-		add(saveButton);
+		saveButton.setActionCommand("save");
+		saveButton.addActionListener(this);
+		saveButton.setPreferredSize(btnSize);
+		panel2.add(saveButton);
 
 		JButton closeButton = new JButton("Close");
-		closeButton.addActionListener(this);
 		closeButton.setActionCommand("close");
-		add(closeButton);
+		closeButton.addActionListener(this);
+		closeButton.setPreferredSize(btnSize);
+		panel2.add(closeButton);
 	}
 	
 	
-	//---> DEBUG 
 	@Override public void actionPerformed(ActionEvent e) {
-		switch (e.getActionCommand()) {
-		case "clear": {
-			System.out.println("clear");
-		} 
-		case "save": {
-			System.out.println("save");
-		}
-		case "close": {
-			System.out.println("close");
-		}
-		default:
-			System.out.println(btnGroup.getSelection().getActionCommand());
-			break;
+		switch(e.getActionCommand()) {
+			case "undo":
+				break;
+				
+			case "redo":
+				break;
+				
+			case "color":
+				selectColor = JColorChooser.showDialog(this,"Color Selector", Color.black);
+				break;
+				
+			case "clear": 
+				paint4.clear();
+				break;
+				
+			case "load":
+				if(file.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+					paint4.load(file.getSelectedFile().getPath());
+					System.out.println(file.getSelectedFile().getPath());
+				} else {
+					System.out.println("canceled or error");					
+				}
+				break;
+				
+			case "save":
+				if(file.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+					paint4.save(file.getSelectedFile().getPath());
+				} else {
+					System.out.println("canceled or error");										
+				}
+				break;
+				
+			case "close":
+				System.exit(0);
+				break;
+				
+			default:
+				System.out.println("notset ActionCommand");
+				break;
 		}
 	}
-	//<--- DEBUG
 	
 	@Override public void mouseClicked(MouseEvent e) {}
 	@Override public void mousePressed(MouseEvent e) {}
 	@Override public void mouseReleased(MouseEvent e) {}
 	@Override public void mouseEntered(MouseEvent e) {}
 	@Override public void mouseExited(MouseEvent e) {}
+	
+	public String getObjMode() {
+		return objModeGroup.getSelection().getActionCommand();
+	}
+	public Color getColor() {
+		System.out.println(selectColor);//debug
+		return this.selectColor;
+	}
 }
 

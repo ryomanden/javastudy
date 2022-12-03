@@ -1,8 +1,5 @@
 package enshu10_2022;
 
-import java.awt.Button;
-import java.awt.Checkbox;
-import java.awt.CheckboxGroup;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Graphics;
@@ -28,9 +25,7 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 	int x, y;
 	
 	ArrayList<enshu10_2022.Figure> objList;
-	CheckboxGroup cbg;
-	Checkbox c1, c2, c3 ,c4;
-	Button end;
+
 	int mode = 0;
 	enshu10_2022.Figure obj;
 	
@@ -38,7 +33,7 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 	static int width = screenSize.width;
 	static int height = screenSize.height;
 	
-	static toolbar toolbar = new toolbar();
+	static toolbar toolbar = null;
 	
 	public static void main(String[] args) {
 		
@@ -51,7 +46,11 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 			}
 		});
 		f.setVisible(true);
-		if(args .length == 1) f.load(args[0]);
+		
+		toolbar= new toolbar(f);
+		
+		
+		//if(args .length == 1) f.load(args[0]);
 		toolbar.setBounds(width / 4 + 645, height / 4, 200, 480);
 	}
 	
@@ -63,26 +62,11 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 		addComponentListener(this);//ウィンドウのサイズ変更を見る
 		setLayout(null);
 		
-		cbg = new CheckboxGroup();
-		c1 = new Checkbox("丸",cbg,true);
-		c1.setBounds(560,30,60,30);
-		add(c1);
-		c2 = new Checkbox("円",cbg,false);
-		c2.setBounds(560,60,60,30);
-		add(c2);
-		c3 = new Checkbox("四角",cbg,false);
-		c3.setBounds(560,90,60,30);
-		add(c3);
-		c4 = new Checkbox("線",cbg,false);
-		c4.setBounds(560,120,60,30);
-		add(c4);
-		
-		end = new Button("終了");
-		end.setBounds(560,300,60,30);
-		add(end);
-		
-		end.addActionListener(this);
-		
+	}
+	
+	public void clear() {
+		objList.clear();
+		repaint();
 	}
 	
 	public void save(String fname) {
@@ -94,6 +78,7 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 			fos.close();
 		} catch(IOException e) {
 		}
+		System.out.println("saved");//debug
 		repaint();
 	}
 	
@@ -108,6 +93,7 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 		} catch(IOException e) {
 		} catch (ClassNotFoundException e) {
 		}
+		System.out.println("loaded");//debug
 		repaint();
 	}
 
@@ -121,31 +107,34 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 		if(mode >= 1) obj.paint(g);
 	}
 	
-	
-	@Override public void actionPerformed(ActionEvent e) {
-		save("paint.dat");
-		System.exit(0);
-	}
-	
 	@Override public void mousePressed(MouseEvent e) {
-		Checkbox c;
 		x = e.getX();
 		y = e.getY();
 		
-		c = cbg.getSelectedCheckbox();
-		obj = null;
-		if (c == c1) {
-			mode = 1;
-			obj = new Dot();
-		} else if(c == c2) {
-			mode = 2;
-			obj = new enshu10_2022.Circle();
-		} else if(c == c3) {
-			mode = 2;
-			obj = new Rect();
-		} else if(c == c4) {
-			mode = 2;
-			obj = new Line();
+		
+		switch (toolbar.getObjMode()) {
+			case "dott":
+				mode = 1;
+				obj = new Dot(toolbar.getColor());
+				break;
+				
+			case "circle":
+				mode = 2;
+				obj = new enshu10_2022.Circle(toolbar.getColor());
+				break;
+				
+			case "rect":
+				mode = 2;
+				obj = new Rect(toolbar.getColor());
+				break;
+				
+			case "line":
+				mode = 2;
+				obj = new Line(toolbar.getColor());
+				break;
+				
+			default:
+				break;
 		}
 		if(obj != null) {
 			obj.moveto(x, y);
@@ -184,12 +173,18 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 	@Override public void windowGainedFocus(WindowEvent e) {}
 	@Override public void windowLostFocus(WindowEvent e) {}
 	@Override public void componentResized(ComponentEvent e) {
-		toolbar.setLocation(getX()+ getWidth() + 10, getY());
+		if(toolbar != null) {toolbar.setLocation(getX()+ getWidth() + 10, getY());}
 	}
 	@Override public void componentMoved(ComponentEvent e) {
-		toolbar.setLocation(getX()+ getWidth() + 10, getY());	
+		if(toolbar != null) {toolbar.setLocation(getX()+ getWidth() + 10, getY());}
 	}
 	@Override public void componentShown(ComponentEvent e) {}
 	@Override public void componentHidden(ComponentEvent e) {}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
 	
 }
