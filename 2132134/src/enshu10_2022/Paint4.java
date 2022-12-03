@@ -24,6 +24,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JToggleButton;
+
 public class Paint4 extends Frame implements MouseListener, MouseMotionListener,ActionListener, WindowFocusListener ,ComponentListener{
 	int x, y;
 	
@@ -56,6 +60,7 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 	}
 	
 	Paint4(){
+		btnEvent();
 		objList = new ArrayList<enshu10_2022.Figure>();
 		addMouseListener(this);
 		addMouseMotionListener(this);
@@ -101,13 +106,51 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 		try {
 			FileInputStream fis = new FileInputStream(fname);
 			ObjectInputStream ois = new ObjectInputStream(fis);
-			objList = (ArrayList<Figure>)ois.readObject();
+			objList = (ArrayList<enshu10_2022.Figure>)ois.readObject();
 			ois.close();
 			fis.close();
 		} catch(IOException e) {
 		} catch (ClassNotFoundException e) {
 		}
 		repaint();
+	}
+	
+	void btnEvent() {
+		ButtonGroup btnGroup = new ButtonGroup();
+		JButton clearButton = new JButton("Clear");
+		JButton saveButton = new JButton("Save");
+		JButton closeButton = new JButton("Close");
+		JToggleButton dotToggleButton = new JToggleButton("dot",true);
+		dotToggleButton.setActionCommand("dott");
+		JToggleButton lineToggleButton = new JToggleButton("line",false);
+		lineToggleButton.setActionCommand("line");
+		
+		clearButton.addActionListener(new ActionListener() {
+			@Override public void actionPerformed(ActionEvent e) {
+				objList.clear();
+				repaint();
+				System.out.println(btnGroup.getSelection().getActionCommand());
+			}
+		});
+		saveButton.addActionListener(new ActionListener() {
+			@Override public void actionPerformed(ActionEvent e) {
+				save("paint.dat");
+			}
+		});
+		closeButton.addActionListener(new ActionListener() {
+			@Override public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		
+		btnGroup.add(dotToggleButton);
+		btnGroup.add(lineToggleButton);
+		
+		toolbar.add(dotToggleButton);
+		toolbar.add(lineToggleButton);
+		toolbar.add(clearButton);
+		toolbar.add(saveButton);
+		toolbar.add(closeButton);
 	}
 	
 	@Override public void paint(Graphics g) {
@@ -182,13 +225,12 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 
 	@Override
 	public void windowGainedFocus(WindowEvent e) {
-		toolbar.toFront();
+
 	}
 
 	@Override
 	public void windowLostFocus(WindowEvent e) {
-		// TODO 自動生成されたメソッド・スタブ
-		
+
 	}
 
 	@Override
