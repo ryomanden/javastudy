@@ -13,7 +13,7 @@ import javax.swing.JToggleButton;
 
 class toolbar extends JFrame implements MouseListener, ActionListener{
 	
-	ButtonGroup btnGroup = new ButtonGroup();
+	private ButtonGroup btnGroup = new ButtonGroup();
 	
 	public toolbar() {
 		getContentPane().setLayout(new FlowLayout());
@@ -32,24 +32,27 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 	}
 	
 	void btnEvent() {
+		JToggleButton dotToggleButton = new JToggleButton("dot",true);
+		dotToggleButton.setActionCommand("dott");
+		btnGroup.add(dotToggleButton);
+		add(dotToggleButton);
+		
+		JToggleButton lineToggleButton = new JToggleButton("line",false);
+		lineToggleButton.setActionCommand("line");
+		btnGroup.add(lineToggleButton);
+		add(lineToggleButton);
+		
 		JButton clearButton = new JButton("Clear");
+		clearButton.addActionListener(this);
+		clearButton.setActionCommand("clear");
+		add(clearButton);
+
 		JButton saveButton = new JButton("Save");
+		add(saveButton);
+
 		JButton closeButton = new JButton("Close");
 		closeButton.addActionListener(this);
 		closeButton.setActionCommand("close");
-		JToggleButton dotToggleButton = new JToggleButton("dot",true);
-		dotToggleButton.addActionListener(this);
-		dotToggleButton.setActionCommand("dott");
-		JToggleButton lineToggleButton = new JToggleButton("line",false);
-		lineToggleButton.setActionCommand("line");
-		
-		btnGroup.add(dotToggleButton);
-		btnGroup.add(lineToggleButton);
-
-		add(dotToggleButton);
-		add(lineToggleButton);
-		add(clearButton);
-		add(saveButton);
 		add(closeButton);
 	}
 	
@@ -57,15 +60,17 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 	//---> DEBUG 
 	@Override public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
-		case "dott": {
-			System.out.println("dott");
-			break;	
-		} case "line": {
-			System.out.println("line");
-		} case "close": {
+		case "clear": {
+			System.out.println("clear");
+		} 
+		case "save": {
+			System.out.println("save");
+		}
+		case "close": {
 			System.out.println("close");
 		}
 		default:
+			System.out.println(btnGroup.getSelection().getActionCommand());
 			break;
 		}
 	}

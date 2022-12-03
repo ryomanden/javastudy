@@ -62,6 +62,7 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 		addWindowFocusListener(this);//ウィンドウがアクティブか見る
 		addComponentListener(this);//ウィンドウのサイズ変更を見る
 		setLayout(null);
+		
 		cbg = new CheckboxGroup();
 		c1 = new Checkbox("丸",cbg,true);
 		c1.setBounds(560,30,60,30);
@@ -180,39 +181,15 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 
 	}
 	@Override public void mouseMoved(MouseEvent e) {}
-
-	@Override
-	public void windowGainedFocus(WindowEvent e) {
-
-	}
-
-	@Override
-	public void windowLostFocus(WindowEvent e) {
-
-	}
-
-	@Override
-	public void componentResized(ComponentEvent e) {
+	@Override public void windowGainedFocus(WindowEvent e) {}
+	@Override public void windowLostFocus(WindowEvent e) {}
+	@Override public void componentResized(ComponentEvent e) {
 		toolbar.setLocation(getX()+ getWidth() + 10, getY());
-		
 	}
-
-	@Override
-	public void componentMoved(ComponentEvent e) {
-		toolbar.setLocation(getX()+ getWidth() + 10, getY());
-		
+	@Override public void componentMoved(ComponentEvent e) {
+		toolbar.setLocation(getX()+ getWidth() + 10, getY());	
 	}
-
-	@Override
-	public void componentShown(ComponentEvent e) {
-		// TODO 自動生成されたメソッド・スタブ
-		
-	}
-
-	@Override
-	public void componentHidden(ComponentEvent e) {
-		// TODO 自動生成されたメソッド・スタブ
-		
-	}
+	@Override public void componentShown(ComponentEvent e) {}
+	@Override public void componentHidden(ComponentEvent e) {}
 	
 }
