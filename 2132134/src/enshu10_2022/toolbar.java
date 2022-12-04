@@ -15,6 +15,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -72,6 +73,12 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 		panel2.setPreferredSize(new Dimension(180,120));
 		panel2.setBorder(toolBorder);
 		add(panel2);
+
+		TitledBorder colorBorder = new TitledBorder("Color");
+		JPanel panel3 = new JPanel();
+		panel3.setPreferredSize(new Dimension(180,100));
+		panel3.setBorder(colorBorder);
+		add(panel3);
 		
 		JToggleButton dotToggleButton = new JToggleButton("Dot",true);
 		dotToggleButton.setActionCommand("dott");
@@ -97,12 +104,6 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 		objModeGroup.add(lineToggleButton);
 		panel1.add(lineToggleButton);
 		
-		JButton colorButton = new JButton("Color");
-		colorButton.setActionCommand("color");
-		colorButton.addActionListener(this);
-		colorButton.setPreferredSize(btnSize);
-		panel2.add(colorButton);
-		
 		JButton clearButton = new JButton("Clear");
 		clearButton.setActionCommand("clear");
 		clearButton.addActionListener(this);
@@ -126,6 +127,22 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 		closeButton.addActionListener(this);
 		closeButton.setPreferredSize(btnSize);
 		panel2.add(closeButton);
+
+		JButton colorButton = new JButton();
+		colorButton.setActionCommand("color");
+		colorButton.addActionListener(this);
+		colorButton.setPreferredSize(new Dimension(50,50));
+		colorButton.setBackground(getColor());
+		panel3.add(colorButton);
+
+		JButton borderColorButton = new JButton();
+		borderColorButton.setActionCommand("border");
+		borderColorButton.addActionListener(this);
+		borderColorButton.setPreferredSize(new Dimension(50,50));
+		borderColorButton.setBackground(Color.WHITE);
+		borderColorButton.setBorder(new LineBorder(Color.RED, 15, false));
+		panel3.add(borderColorButton);
+		
 	}
 	
 	
@@ -141,6 +158,9 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 				
 			case "color":
 				selectColor = JColorChooser.showDialog(this,"Color Selector", Color.black);
+				break;
+			
+			case "border":
 				break;
 				
 			case "clear": 
