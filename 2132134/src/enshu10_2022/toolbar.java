@@ -132,9 +132,11 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 	@Override public void actionPerformed(ActionEvent e) {
 		switch(e.getActionCommand()) {
 			case "undo":
+				paint4.undo();
 				break;
 				
 			case "redo":
+				paint4.redo();
 				break;
 				
 			case "color":

@@ -26,7 +26,7 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 	
 	ArrayList<enshu10_2022.Figure> objList;
 
-	int mode = 0;
+	int mode = 0, undo = 0;
 	enshu10_2022.Figure obj;
 	
 	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -62,6 +62,22 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 		addComponentListener(this);//ウィンドウのサイズ変更を見る
 		setLayout(null);
 		
+	}
+	
+	void undo() {
+		if(undo < objList.size()) {
+			undo +=1;
+			System.out.println("undo" + undo);//debug
+		}
+		repaint();
+	}
+	
+	void redo() {
+		if(undo > 0) {
+			undo -= 1;
+			System.out.println("redo" + undo);//debug
+		}
+		repaint();
 	}
 	
 	public void clear() {
@@ -100,7 +116,7 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 	
 	@Override public void paint(Graphics g) {
 		enshu10_2022.Figure f;
-		for(int i = 0; i < objList.size(); i++) {
+		for(int i = 0; i < (objList.size() - undo); i++) {
 			f = objList.get(i);
 			f.paint(g);
 		}
@@ -111,6 +127,11 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 		x = e.getX();
 		y = e.getY();
 		
+		if(undo != 0) {
+			for(;undo > 0; undo--) {
+				objList.remove(objList.size()-1);
+			}
+		}
 		
 		switch (toolbar.getObjMode()) {
 			case "dott":
