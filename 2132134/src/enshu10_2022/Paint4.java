@@ -8,8 +8,6 @@ import java.awt.Graphics;
 import java.awt.Label;
 import java.awt.Panel;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
@@ -17,7 +15,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowFocusListener;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -25,7 +22,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-public class Paint4 extends Frame implements MouseListener, MouseMotionListener,ActionListener, WindowFocusListener ,ComponentListener{
+public class Paint4 extends Frame implements MouseListener, MouseMotionListener ,ComponentListener{
 	int x, y;
 	
 	ArrayList<enshu10_2022.Figure> objList;
@@ -61,7 +58,6 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 		objList = new ArrayList<enshu10_2022.Figure>();
 		addMouseListener(this);
 		addMouseMotionListener(this);
-		addWindowFocusListener(this);//ウィンドウがアクティブか見る
 		addComponentListener(this);//ウィンドウのサイズ変更を見る
 		setLayout(new BorderLayout());
 		Panel statusPanel = new Panel();
@@ -195,11 +191,8 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 			obj.setWH(x - obj.x, y - obj.y);
 		}
 		repaint();
-
 	}
 	@Override public void mouseMoved(MouseEvent e) {}
-	@Override public void windowGainedFocus(WindowEvent e) {}
-	@Override public void windowLostFocus(WindowEvent e) {}
 	@Override public void componentResized(ComponentEvent e) {
 		if(toolbar != null) {toolbar.setLocation(getX()+ getWidth() + 10, getY());}
 	}
@@ -208,12 +201,7 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 	}
 	@Override public void componentShown(ComponentEvent e) {}
 	@Override public void componentHidden(ComponentEvent e) {}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO 自動生成されたメソッド・スタブ
-		
-	}
+	
 	public void setStatus(String status) {
 		statusLabel.setText(status);
 	}
