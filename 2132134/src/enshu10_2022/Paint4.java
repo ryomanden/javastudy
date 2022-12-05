@@ -82,6 +82,7 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 	
 	public void clear() {
 		objList.clear();
+		undo = 0;
 		repaint();
 	}
 	
