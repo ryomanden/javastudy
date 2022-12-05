@@ -61,7 +61,7 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 	JButton colorButton = new JButton("");
 	JButton fillButton = new JButton("");
 	JLabel statusLabel = new JLabel("status");
-
+	
 	void btnEvent() {
 		Dimension btnSize = new Dimension(80,40);
 		GridLayout col2Layout = new GridLayout(0,2,5,5);
@@ -155,6 +155,10 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 		fillButton.setFont(awesome);
 		panel3.add(fillButton);
 		
+		MenuBtn btn1 = new MenuBtn("text","test");
+		add(btn1);
+		
+		paint4.setStatus("Ready.");
 	}
 	
 	
@@ -207,6 +211,10 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 				
 			case "close":
 				System.exit(0);
+				break;
+			
+			case "test":
+				paint4.setStatus("test");
 				break;
 				
 			default:
