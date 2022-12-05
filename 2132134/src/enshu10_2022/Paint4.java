@@ -1,8 +1,12 @@
 package enshu10_2022;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.Label;
+import java.awt.Panel;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,9 +38,8 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 	static int height = screenSize.height;
 	
 	static toolbar toolbar = null;
-	
+	Label statusLabel = new Label("Loading...");
 	public static void main(String[] args) {
-		
 		Paint4 f = new Paint4();
 		f.setBounds(width / 4, height / 4, 640, 480);
 		f.setTitle("Paint Sample");
@@ -60,14 +63,17 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 		addMouseMotionListener(this);
 		addWindowFocusListener(this);//ウィンドウがアクティブか見る
 		addComponentListener(this);//ウィンドウのサイズ変更を見る
-		setLayout(null);
-		
+		setLayout(new BorderLayout());
+		Panel statusPanel = new Panel();
+		statusPanel.add(statusLabel);
+		statusPanel.setBackground(Color.LIGHT_GRAY);
+		add(statusPanel,BorderLayout.SOUTH);
 	}
 	
 	void undo() {
 		if(undo < objList.size()) {
 			undo +=1;
-			System.out.println("undo" + undo);//debug
+			setStatus("undo" + undo);//debug
 		}
 		repaint();
 	}
@@ -75,7 +81,7 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 	void redo() {
 		if(undo > 0) {
 			undo -= 1;
-			System.out.println("redo" + undo);//debug
+			setStatus("redo" + undo);//debug
 		}
 		repaint();
 	}
@@ -95,7 +101,7 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 			fos.close();
 		} catch(IOException e) {
 		}
-		System.out.println("saved");//debug
+		setStatus("saved");//debug
 		repaint();
 	}
 	
@@ -110,7 +116,7 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 		} catch(IOException e) {
 		} catch (ClassNotFoundException e) {
 		}
-		System.out.println("loaded");//debug
+		setStatus("loaded");//debug
 		repaint();
 	}
 
@@ -208,5 +214,7 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 		// TODO 自動生成されたメソッド・スタブ
 		
 	}
-	
+	public void setStatus(String status) {
+		statusLabel.setText(status);
+	}
 }

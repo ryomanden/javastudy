@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import javax.swing.border.TitledBorder;
@@ -59,6 +60,7 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 	JButton closeButton = new JButton("");
 	JButton colorButton = new JButton("");
 	JButton fillButton = new JButton("");
+	JLabel statusLabel = new JLabel("status");
 
 	void btnEvent() {
 		Dimension btnSize = new Dimension(80,40);
@@ -174,11 +176,11 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 				if(fillStatus == true) {
 					fillButton.setText("");
 					fillStatus = !fillStatus;
-					System.out.println(fillStatus);
+					paint4.setStatus("False");
 				} else {
 					fillButton.setText("");
 					fillStatus = !fillStatus;
-					System.out.println(fillStatus);
+					paint4.setStatus("True");
 				}
 				break;
 				
@@ -189,9 +191,9 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 			case "load":
 				if(file.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 					paint4.load(file.getSelectedFile().getPath());
-					System.out.println(file.getSelectedFile().getPath());
+					paint4.setStatus(file.getSelectedFile().getPath());
 				} else {
-					System.out.println("canceled or error");					
+					paint4.setStatus("canceled or error");
 				}
 				break;
 				
@@ -199,7 +201,7 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 				if(file.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
 					paint4.save(file.getSelectedFile().getPath());
 				} else {
-					System.out.println("canceled or error");										
+					paint4.setStatus("canceled or error");
 				}
 				break;
 				
@@ -208,7 +210,7 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 				break;
 				
 			default:
-				System.out.println("notset ActionCommand");
+				paint4.setStatus("notset ActionCommand");
 				break;
 		}
 	}
@@ -226,7 +228,6 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 		return fillStatus;
 	}
 	public Color getColor() {
-		System.out.println(selectColor);//debug
 		return this.selectColor;
 	}
 }
