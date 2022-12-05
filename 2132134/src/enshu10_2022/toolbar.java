@@ -3,7 +3,6 @@ package enshu10_2022;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,13 +10,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.ButtonGroup;
-import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JToggleButton;
 import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -27,6 +23,8 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 	private JFileChooser file = new JFileChooser( "." );
 	private Color selectColor = Color.black;
 	Paint4 paint4 = null;
+	
+	MenuIconBtn fillButton = new MenuIconBtn("\uf5c7","fill");
 	
 	private boolean fillStatus = false;
 	
@@ -48,35 +46,15 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 		//new toolbar();
 	}
 	
-	JButton undoButton = new JButton("");
-	JButton redoButton = new JButton("");
-	JToggleButton dotToggleButton = new JToggleButton("Dot",true);
-	JToggleButton circleButton = new JToggleButton("Circle",false);
-	JToggleButton rectToggleButton = new JToggleButton("Rect",false);
-	JToggleButton lineToggleButton = new JToggleButton("Line",false);
-	JButton clearButton = new JButton("");
-	JButton loadButton = new JButton("");
-	JButton saveButton = new JButton("");
-	JButton closeButton = new JButton("");
-	JButton colorButton = new JButton("");
-	JButton fillButton = new JButton("");
-	JLabel statusLabel = new JLabel("status");
-	
 	void btnEvent() {
-		Dimension btnSize = new Dimension(80,40);
 		GridLayout col2Layout = new GridLayout(0,2,5,5);
-		Font awesome = new Font("Font Awesome 6 Free", Font.PLAIN, 15);
 		
+		MenuIconBtn undoButton = new MenuIconBtn("\uf3e5","undo");
 		undoButton.addActionListener(this);
-		undoButton.setPreferredSize(btnSize);
-		undoButton.setActionCommand("undo");
-		undoButton.setFont(awesome);
 		add(undoButton);
 		
+		MenuIconBtn redoButton = new MenuIconBtn("\uf064", "redo");
 		redoButton.addActionListener(this);
-		redoButton.setPreferredSize(btnSize);
-		redoButton.setFont(awesome);
-		redoButton.setActionCommand("redo");
 		add(redoButton);
 		
 		TitledBorder styleBorder = new TitledBorder("ObjectStyle");
@@ -97,66 +75,46 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 		panel3.setBorder(colorBorder);
 		add(panel3);
 		
-		dotToggleButton.setActionCommand("dott");
-		dotToggleButton.setPreferredSize(btnSize);
+		MenuTButton dotToggleButton = new MenuTButton("Dot","dott",true);
 		objModeGroup.add(dotToggleButton);
 		panel1.add(dotToggleButton);
 		
-		circleButton.setActionCommand("circle");
-		circleButton.setPreferredSize(btnSize);
+		MenuTButton circleButton = new MenuTButton("Circle","circle",false);
 		objModeGroup.add(circleButton);
 		panel1.add(circleButton);
 
-		rectToggleButton.setActionCommand("rect");
-		rectToggleButton.setPreferredSize(btnSize);
+		MenuTButton rectToggleButton = new MenuTButton("Rect","rect",false);
 		objModeGroup.add(rectToggleButton);
 		panel1.add(rectToggleButton);
 		
-		lineToggleButton.setActionCommand("line");
-		lineToggleButton.setPreferredSize(btnSize);
+		MenuTButton lineToggleButton = new MenuTButton("Line","line",false);
 		objModeGroup.add(lineToggleButton);
 		panel1.add(lineToggleButton);
 		
-		clearButton.setActionCommand("clear");
+		MenuIconBtn clearButton = new MenuIconBtn("\uf12d", "clear");
 		clearButton.addActionListener(this);
-		clearButton.setPreferredSize(btnSize);
-		clearButton.setFont(awesome);
 		panel2.add(clearButton);
 
+		MenuIconBtn loadButton = new MenuIconBtn("\uf07c","load");
 		loadButton.addActionListener(this);
-		loadButton.setPreferredSize(btnSize);
-		loadButton.setActionCommand("load");
-		loadButton.setFont(awesome);
 		panel2.add(loadButton);
 
-		saveButton.setActionCommand("save");
+		MenuIconBtn saveButton = new MenuIconBtn("\uf0c7","save");
 		saveButton.addActionListener(this);
-		saveButton.setPreferredSize(btnSize);
-		saveButton.setFont(awesome);
 		panel2.add(saveButton);
 
-		closeButton.setActionCommand("close");
+		MenuIconBtn closeButton = new MenuIconBtn("\uf057","close");
 		closeButton.addActionListener(this);
-		closeButton.setPreferredSize(btnSize);
-		closeButton.setFont(awesome);
 		panel2.add(closeButton);
 
-		colorButton.setActionCommand("color");
+		MenuIconBtn colorButton = new MenuIconBtn("\uf53f","color");
 		colorButton.addActionListener(this);
 		colorButton.setPreferredSize(new Dimension(50,50));
-		colorButton.setBackground(getColor());
-		colorButton.setFont(awesome);
 		panel3.add(colorButton);
 
-		fillButton.setActionCommand("fill");
 		fillButton.addActionListener(this);
 		fillButton.setPreferredSize(new Dimension(50,50));
-		fillButton.setBackground(Color.WHITE);
-		fillButton.setFont(awesome);
 		panel3.add(fillButton);
-		
-		MenuBtn btn1 = new MenuBtn("text","test");
-		add(btn1);
 		
 		paint4.setStatus("Ready.");
 	}
@@ -178,11 +136,11 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 			
 			case "fill":
 				if(fillStatus == true) {
-					fillButton.setText("");
+					fillButton.setText("\uf5c7");
 					fillStatus = !fillStatus;
 					paint4.setStatus("False");
 				} else {
-					fillButton.setText("");
+					fillButton.setText("\uf043");
 					fillStatus = !fillStatus;
 					paint4.setStatus("True");
 				}
