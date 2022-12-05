@@ -5,6 +5,7 @@ import java.awt.Graphics;
 
 public class Figure extends Coord {
 	Color color;
+	Boolean fillStatus = false;
 	int w, h;
 	Figure(){
 		w = h = 0;

@@ -136,17 +136,17 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener,
 		switch (toolbar.getObjMode()) {
 			case "dott":
 				mode = 1;
-				obj = new Dot(toolbar.getColor());
+				obj = new Dot(toolbar.getColor(),toolbar.getFillStatus());
 				break;
 				
 			case "circle":
 				mode = 2;
-				obj = new enshu10_2022.Circle(toolbar.getColor());
+				obj = new enshu10_2022.Circle(toolbar.getColor(),toolbar.getFillStatus());
 				break;
 				
 			case "rect":
 				mode = 2;
-				obj = new Rect(toolbar.getColor());
+				obj = new Rect(toolbar.getColor(),toolbar.getFillStatus());
 				break;
 				
 			case "line":
