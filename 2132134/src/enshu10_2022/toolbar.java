@@ -25,6 +25,8 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 	Paint4 paint4 = null;
 	
 	MenuIconBtn fillButton = new MenuIconBtn("\uf5c7","fill");
+	MenuIconBtn undoButton = new MenuIconBtn("\uf3e5","undo");
+	MenuIconBtn redoButton = new MenuIconBtn("\uf064", "redo");
 	
 	private boolean fillStatus = false;
 	
@@ -42,19 +44,19 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 		btnEvent();
 		setVisible(true);
 	}
-	public static void main(String [] args) {
+	public static void main(String[] args) {
 		//new toolbar();
 	}
 	
 	void btnEvent() {
 		GridLayout col2Layout = new GridLayout(0,2,5,5);
 		
-		MenuIconBtn undoButton = new MenuIconBtn("\uf3e5","undo");
 		undoButton.addActionListener(this);
+		undoButton.setEnabled(false);
 		add(undoButton);
 		
-		MenuIconBtn redoButton = new MenuIconBtn("\uf064", "redo");
 		redoButton.addActionListener(this);
+		redoButton.setEnabled(false);
 		add(redoButton);
 		
 		TitledBorder styleBorder = new TitledBorder("ObjectStyle");
@@ -195,6 +197,12 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 	}
 	public Color getColor() {
 		return this.selectColor;
+	}
+	public void setUndo(boolean undo) {
+		undoButton.setEnabled(undo);
+	}
+	public void setRedo(boolean redo) {
+		redoButton.setEnabled(redo);
 	}
 }
 

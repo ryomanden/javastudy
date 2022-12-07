@@ -67,19 +67,19 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener 
 	}
 	
 	void undo() {
-		if(undo < objList.size()) {
+		if(undo < objList.size()) {// <---undo
 			undo +=1;
 			setStatus("undo" + undo);//debug
+			repaint();
 		}
-		repaint();
 	}
 	
 	void redo() {
 		if(undo > 0) {
 			undo -= 1;
 			setStatus("redo" + undo);//debug
+			repaint();
 		}
-		repaint();
 	}
 	
 	public void clear() {
@@ -123,6 +123,18 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener 
 			f = objList.get(i);
 			f.paint(g);
 		}
+		if(toolbar != null) {
+			if(0 < objList.size() && undo < objList.size()) {
+				toolbar.setUndo(true);
+			} else {
+				toolbar.setUndo(false);
+			}
+			if(undo > 0) {
+				toolbar.setRedo(true);
+			} else {
+				toolbar.setRedo(false);
+			}
+		}
 		if(mode >= 1) obj.paint(g);
 	}
 	
@@ -130,7 +142,7 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener 
 		x = e.getX();
 		y = e.getY();
 		
-		if(undo != 0) {
+		if(undo != 0) {// <---undo delete
 			for(;undo > 0; undo--) {
 				objList.remove(objList.size()-1);
 			}
