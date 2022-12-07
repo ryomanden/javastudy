@@ -2,6 +2,7 @@ package enshu10_2022;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Graphics;
@@ -35,9 +36,9 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener 
 	static int height = screenSize.height;
 	
 	static toolbar toolbar = null;
+	static Paint4 f = new Paint4();
 	Label statusLabel = new Label("Loading...");
 	public static void main(String[] args) {
-		Paint4 f = new Paint4();
 		f.setBounds(width / 4, height / 4, 640, 480);
 		f.setTitle("Paint Sample");
 		f.addWindowListener(new WindowAdapter() {
@@ -216,5 +217,8 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener 
 	
 	public void setStatus(String status) {
 		statusLabel.setText(status);
+	}
+	public void setCursor(int Cursor) {
+		f.setCursor(new Cursor(Cursor));
 	}
 }

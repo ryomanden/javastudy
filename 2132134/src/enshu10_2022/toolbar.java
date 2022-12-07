@@ -1,6 +1,7 @@
 package enshu10_2022;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -78,18 +79,22 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 		add(panel3);
 		
 		MenuTButton dotToggleButton = new MenuTButton("Dot","dott",true);
+		dotToggleButton.addActionListener(this);
 		objModeGroup.add(dotToggleButton);
 		panel1.add(dotToggleButton);
 		
 		MenuTButton circleButton = new MenuTButton("Circle","circle",false);
+		circleButton.addActionListener(this);
 		objModeGroup.add(circleButton);
 		panel1.add(circleButton);
 
 		MenuTButton rectToggleButton = new MenuTButton("Rect","rect",false);
+		rectToggleButton.addActionListener(this);
 		objModeGroup.add(rectToggleButton);
 		panel1.add(rectToggleButton);
 		
 		MenuTButton lineToggleButton = new MenuTButton("Line","line",false);
+		lineToggleButton.addActionListener(this);
 		objModeGroup.add(lineToggleButton);
 		panel1.add(lineToggleButton);
 		
@@ -105,7 +110,7 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 		saveButton.addActionListener(this);
 		panel2.add(saveButton);
 
-		MenuIconBtn closeButton = new MenuIconBtn("\uf057","close","Colse this program");
+		MenuIconBtn closeButton = new MenuIconBtn("\uf057","close","Quit this program");
 		closeButton.addActionListener(this);
 		panel2.add(closeButton);
 
@@ -173,8 +178,20 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 				System.exit(0);
 				break;
 			
-			case "test":
-				paint4.setStatus("test");
+			case "dott":
+				paint4.setCursor(Cursor.DEFAULT_CURSOR);
+				break;
+
+			case "circle":
+				paint4.setCursor(Cursor.CROSSHAIR_CURSOR);
+				break;
+				
+			case "rect":
+				paint4.setCursor(Cursor.CROSSHAIR_CURSOR);
+				break;
+				
+			case "line":
+				paint4.setCursor(Cursor.CROSSHAIR_CURSOR);
 				break;
 				
 			default:

@@ -11,5 +11,6 @@ class MenuTButton extends JToggleButton{
 		setActionCommand(command);
 		setPreferredSize(new Dimension(80,40));
 		setCursor(new Cursor(Cursor.HAND_CURSOR));
+		setActionCommand(command);
 	}
 }
