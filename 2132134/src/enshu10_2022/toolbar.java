@@ -44,7 +44,7 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 		btnEvent();
 		setVisible(true);
 	}
-	public static void main(String[] args) {
+	public static void main() {
 		//new toolbar();
 	}
 	
@@ -192,8 +192,8 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 	public String getObjMode() {
 		return objModeGroup.getSelection().getActionCommand();
 	}
-	public boolean getFillStatus() {
-		return fillStatus;
+	public Boolean getFillStatus() {
+		return this.fillStatus;
 	}
 	public Color getColor() {
 		return this.selectColor;
