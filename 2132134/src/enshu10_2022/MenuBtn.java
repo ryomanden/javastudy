@@ -10,4 +10,10 @@ class MenuBtn extends JButton {
 		setActionCommand(command);
 		setPreferredSize(new Dimension(80,40));
 	}
+	public MenuBtn(String text,String command,String tooltip) {
+		super(text);
+		setActionCommand(command);
+		setPreferredSize(new Dimension(80,40));
+		setToolTipText(tooltip);
+	}
 }

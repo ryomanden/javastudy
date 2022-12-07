@@ -24,9 +24,9 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 	private Color selectColor = Color.black;
 	Paint4 paint4 = null;
 	
-	MenuIconBtn fillButton = new MenuIconBtn("\uf5c7","fill");
-	MenuIconBtn undoButton = new MenuIconBtn("\uf3e5","undo");
-	MenuIconBtn redoButton = new MenuIconBtn("\uf064", "redo");
+	MenuIconBtn fillButton = new MenuIconBtn("\uf5c7","fill","Object fill ON/OFF");
+	MenuIconBtn undoButton = new MenuIconBtn("\uf3e5","undo","Return to previous step");
+	MenuIconBtn redoButton = new MenuIconBtn("\uf064", "redo","Return to next step");
 	
 	private boolean fillStatus = false;
 	
@@ -93,23 +93,23 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 		objModeGroup.add(lineToggleButton);
 		panel1.add(lineToggleButton);
 		
-		MenuIconBtn clearButton = new MenuIconBtn("\uf12d", "clear");
+		MenuIconBtn clearButton = new MenuIconBtn("\uf12d", "clear","Clear all objects");
 		clearButton.addActionListener(this);
 		panel2.add(clearButton);
 
-		MenuIconBtn loadButton = new MenuIconBtn("\uf07c","load");
+		MenuIconBtn loadButton = new MenuIconBtn("\uf07c","load","Load the drawn object from file");
 		loadButton.addActionListener(this);
 		panel2.add(loadButton);
 
-		MenuIconBtn saveButton = new MenuIconBtn("\uf0c7","save");
+		MenuIconBtn saveButton = new MenuIconBtn("\uf0c7","save","Save the drawn object to file");
 		saveButton.addActionListener(this);
 		panel2.add(saveButton);
 
-		MenuIconBtn closeButton = new MenuIconBtn("\uf057","close");
+		MenuIconBtn closeButton = new MenuIconBtn("\uf057","close","Colse this program");
 		closeButton.addActionListener(this);
 		panel2.add(closeButton);
 
-		MenuIconBtn colorButton = new MenuIconBtn("\uf53f","color");
+		MenuIconBtn colorButton = new MenuIconBtn("\uf53f","color","Select object color");
 		colorButton.addActionListener(this);
 		colorButton.setPreferredSize(new Dimension(50,50));
 		panel3.add(colorButton);
