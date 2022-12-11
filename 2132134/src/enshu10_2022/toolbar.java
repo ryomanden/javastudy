@@ -98,7 +98,7 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 		objModeGroup.add(lineToggleButton);
 		panel1.add(lineToggleButton);
 		
-		MenuIconBtn clearButton = new MenuIconBtn("\uf12d", "clear","Clear all objects");
+		MenuIconBtn clearButton = new MenuIconBtn("\uf1f8", "clear","Clear all objects");
 		clearButton.addActionListener(this);
 		panel2.add(clearButton);
 
@@ -110,7 +110,7 @@ class toolbar extends JFrame implements MouseListener, ActionListener{
 		saveButton.addActionListener(this);
 		panel2.add(saveButton);
 
-		MenuIconBtn closeButton = new MenuIconBtn("\uf057","close","Quit this program");
+		MenuIconBtn closeButton = new MenuIconBtn("\uf011","close","Quit this program");
 		closeButton.addActionListener(this);
 		panel2.add(closeButton);
 
