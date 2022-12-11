@@ -4,8 +4,13 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Line extends Figure { //Figureクラスを継承し，Lineクラスを作成する．
-	Line(Color color){this.color = color;}
+	Coord sPoint,ePoint;
+	Line(Coord sPoint, Color color){
+		this.color = color;
+		this.sPoint = sPoint;
+	}
 	@Override public void paint(Graphics g) {
-		g.drawLine(x, y, x + w, y + h); //開始位置から終了位置まで線を引く
+		g.setColor(color);
+		g.drawLine(sPoint.x, sPoint.y, x, y); //開始位置から終了位置まで線を引く
 	}
 }

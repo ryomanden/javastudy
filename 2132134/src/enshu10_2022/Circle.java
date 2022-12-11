@@ -5,19 +5,26 @@ import java.awt.Graphics;
 
 public class Circle extends Figure {
 	
+	int width, height;
+	
 	Circle(Color color) {this.color = color;}
 	Circle(Color color,Boolean fs) {
 		this.color = color;
 		this.fillStatus = fs;
 	}
 	@Override public void paint(Graphics g) {
-		int r = (int)Math.sqrt((double)(w * w + h * h));
 		g.setColor(color);
-		
-		if(fillStatus == true) {
-			g.fillOval(x - r, y - r, r * 2, r * 2);
+		if(isPerfect) {
+			width = (int)Math.sqrt((double)(w * w + h * h));
+			height = (int)Math.sqrt((double)(w * w + h * h));
 		} else {
-			g.drawOval(x - r, y - r, r * 2, r * 2);
+			width = (int)(Math.sqrt(2.0) * Math.abs(w));
+			height = (int)(Math.sqrt(2.0) * Math.abs(h));
+		}
+		if(fillStatus) {
+			g.fillOval(x - width, y - height, width * 2, height * 2);
+		} else {
+			g.drawOval(x - width, y - height, width * 2, height * 2);
 		}
 	}
 }

@@ -5,7 +5,7 @@ import java.awt.Graphics;
 
 public class Figure extends Coord {
 	Color color;
-	Boolean fillStatus = false;
+	boolean fillStatus = false,isPerfect = false;
 	int w, h;
 	Figure(){
 		w = h = 0;
@@ -15,5 +15,7 @@ public class Figure extends Coord {
 		this.w = w;
 		this.h = h;
 	}
-	
+	public void setPerfect(boolean isPerfect) {
+		this.isPerfect = isPerfect;
+	}
 }

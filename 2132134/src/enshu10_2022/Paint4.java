@@ -11,6 +11,8 @@ import java.awt.Panel;
 import java.awt.Toolkit;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -23,8 +25,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-public class Paint4 extends Frame implements MouseListener, MouseMotionListener ,ComponentListener{
+public class Paint4 extends Frame implements MouseListener, MouseMotionListener ,ComponentListener, KeyListener{
 	int x, y;
+	
+	boolean isShift = false, isEnter = false, isDrawing = false;
 	
 	ArrayList<enshu10_2022.Figure> objList;
 
@@ -60,6 +64,7 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener 
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		addComponentListener(this);//ウィンドウのサイズ変更を見る
+		addKeyListener(this);
 		setLayout(new BorderLayout());
 		Panel statusPanel = new Panel();
 		statusPanel.add(statusLabel);
@@ -86,6 +91,7 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener 
 	public void clear() {
 		objList.clear();
 		undo = 0;
+		isDrawing = false;
 		repaint();
 	}
 	
@@ -167,7 +173,10 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener 
 				
 			case "line":
 				mode = 2;
-				obj = new Line(toolbar.getColor());
+				if(!isDrawing) {
+					obj = new Line(new Coord(x,y),toolbar.getColor());
+					isDrawing = true;
+				}
 				break;
 				
 			default:
@@ -175,13 +184,13 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener 
 		}
 		if(obj != null) {
 			obj.moveto(x, y);
+			obj.setPerfect(isShift);
 			repaint();
 		}
 	}
 	@Override public void mouseReleased(MouseEvent e) {
 		x = e.getX();
 		y = e.getY();
-		
 		if(mode == 1) obj.moveto(x, y);
 		else if(mode == 2) obj.setWH(x -obj.x, y -obj.y);
 		if(mode >= 1) {
@@ -189,6 +198,11 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener 
 			obj = null;
 		}
 		mode = 0;
+		if(isDrawing) {
+			obj = new Line(objList.get(objList.size()-1),toolbar.getColor());
+			obj.moveto(x, y);
+			mode = 1;
+		}
 		repaint();
 	}
 	@Override public void mouseClicked(MouseEvent e) {}
@@ -203,9 +217,17 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener 
 		} else if(mode == 2) {
 			obj.setWH(x - obj.x, y - obj.y);
 		}
+		obj.setPerfect(isShift);
 		repaint();
 	}
-	@Override public void mouseMoved(MouseEvent e) {}
+	@Override public void mouseMoved(MouseEvent e) {
+		x = e.getX();
+		y = e.getY();
+		if(isDrawing) {
+			obj.moveto(x, y);
+			repaint();
+		}
+	}
 	@Override public void componentResized(ComponentEvent e) {
 		if(toolbar != null) {toolbar.setLocation(getX()+ getWidth() + 10, getY());}
 	}
@@ -213,7 +235,36 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener 
 		if(toolbar != null) {toolbar.setLocation(getX()+ getWidth() + 10, getY());}
 	}
 	@Override public void componentShown(ComponentEvent e) {}
-	@Override public void componentHidden(ComponentEvent e) {}
+	@Override public void componentHidden(ComponentEvent e) {}	
+	@Override public void keyTyped(KeyEvent e) {}
+	@Override public void keyPressed(KeyEvent e) {
+		switch(e.getKeyCode()) {
+			case KeyEvent.VK_SHIFT:
+				isShift = true;
+				setStatus("shift: true");
+				break;
+			case KeyEvent.VK_ENTER:
+				isEnter = true;
+				isDrawing = false;
+				setStatus("enter: true");
+				obj = null;
+				mode = 0;
+				repaint();
+				break;
+		}
+	}
+	@Override public void keyReleased(KeyEvent e) {
+		switch(e.getKeyCode()) {
+		case KeyEvent.VK_SHIFT:
+			isShift = false;
+			setStatus("shift: false");
+			break;
+		case KeyEvent.VK_ENTER:
+			isEnter = false;
+			setStatus("enter: false");
+			break;
+		}
+	}
 	
 	public void setStatus(String status) {
 		statusLabel.setText(status);
@@ -221,4 +272,5 @@ public class Paint4 extends Frame implements MouseListener, MouseMotionListener 
 	public void setCursor(int Cursor) {
 		f.setCursor(new Cursor(Cursor));
 	}
+
 }

@@ -17,9 +17,9 @@ public class Dot extends Figure {
 	@Override public void paint(Graphics g) {
 		g.setColor(color);
 		if(fillStatus == true) {
-			g.fillOval(x - size/2, y - size/2, size, size);						
+			g.fillOval(x - size/2, y - size/2, size, size);
 		} else {
-			g.drawOval(x - size/2, y - size/2, size, size);			
+			g.drawOval(x - size/2, y - size/2, size, size);
 		}
 	}
 }
