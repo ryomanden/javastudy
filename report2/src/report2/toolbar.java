@@ -4,7 +4,7 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
+import java.awt.event.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -20,16 +20,12 @@ class toolbar extends JFrame implements MouseListener, ActionListener {
     private Color selectColor = Color.black;
     private boolean fillStatus = false;
 
-    public static void main() {
-        //new toolbar();
-    }
+    public static void main() {}
 
     public toolbar(PaintReport paintReport) {
         this.paintReport = paintReport;
         getContentPane().setLayout(new FlowLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //setUndecorated(true);
-        //setAlwaysOnTop(true);
         setTitle("Toolbar");
         addMouseListener(this);
 
@@ -133,7 +129,7 @@ class toolbar extends JFrame implements MouseListener, ActionListener {
                 break;
 
             case "fill":
-                if (fillStatus == true) {
+                if (fillStatus) {
                     fillButton.setText("\uf5c7");
                     fillStatus = !fillStatus;
                     paintReport.setStatus("False");
