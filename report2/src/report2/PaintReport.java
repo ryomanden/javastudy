@@ -282,8 +282,4 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
     public void setCursor_this(int Cursor) {
         f.setCursor(new Cursor(Cursor));
     }
-
-    public boolean isShift() {
-        return isShift;
-    }
 }
