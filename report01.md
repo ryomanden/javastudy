@@ -479,7 +479,7 @@ public class Figure extends Coord {
 
 |  | |
 | :---: | :---: |
-| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-21 at 23.53.41.png)  <div style="font-size:0.8rem"><i>図１：図形を３０個描画．</i></div> | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-21 at 23.53.47.png)<div style="font-size:0.8rem"><i>図２：図形を３１個描画．</i></div> |
+| ![](./screenshot/Screenshot 2022-11-21 at 23.53.41.png)  <div style="font-size:0.8rem"><i>図１：図形を３０個描画．</i></div> | ![](./screenshot/Screenshot 2022-11-21 at 23.53.47.png)<div style="font-size:0.8rem"><i>図２：図形を３１個描画．</i></div> |
 |  |  |
 
 図１，図２のように，値に変更を加えず実行した場合には３０個を超えて図形が描画されることはない．
@@ -488,7 +488,7 @@ public class Figure extends Coord {
 
 | |
 | :---:|
-| <img src="/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.24.06.png" style="width:50%;" /><div style="font-size:0.8rem"><i>図３；[Change Size]を選択し，実行．</i></div> |
+| <img src="./screenshot/Screenshot 2022-11-22 at 0.24.06.png" style="width:50%;" /><div style="font-size:0.8rem"><i>図３；[Change Size]を選択し，実行．</i></div> |
 |  |
 
 図３のように，\[Change Size]を選択し実行すると，10px・50pxと交互にサイズを変えて描画された．
@@ -497,8 +497,8 @@ public class Figure extends Coord {
 
 | | |
 | :---:| :---:|
-| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.31.39.png) <div style="font-size:0.8rem"><i>図４：Rを`255`で実行．</i></div> | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.31.52.png)<div style="font-size:0.8rem"><i>図５：Gを`255`で実行．</i></div> |
-| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.32.03.png)<div style="font-size:0.8rem"><i>図６：Bを`255`で実行．</i></div> | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.33.06.png)<div style="font-size:0.8rem"><i>図７：Rを`255`，Gを`200`，Bを`0`で実行</i></div> |
+| ![](./screenshot/Screenshot 2022-11-22 at 0.31.39.png) <div style="font-size:0.8rem"><i>図４：Rを`255`で実行．</i></div> | ![](./screenshot/Screenshot 2022-11-22 at 0.31.52.png)<div style="font-size:0.8rem"><i>図５：Gを`255`で実行．</i></div> |
+| ![](./screenshot/Screenshot 2022-11-22 at 0.32.03.png)<div style="font-size:0.8rem"><i>図６：Bを`255`で実行．</i></div> | ![](./screenshot/Screenshot 2022-11-22 at 0.33.06.png)<div style="font-size:0.8rem"><i>図７：Rを`255`，Gを`200`，Bを`0`で実行</i></div> |
 | | |
 
 図４，図５，図６，図７ののように，赤，緑，青をそれぞれ256段階で調整できた．
@@ -509,7 +509,7 @@ public class Figure extends Coord {
 
 |                                                              |                                                              |
 | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.51.41.png)<div style="font-size:0.8rem"><i>図８：図形を何も描画しない状態．</i></div> | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.51.45.png)<div style="font-size:0.8rem"><i>図９：図形を３つ描画．</i></div> |
+| ![](./screenshot/Screenshot 2022-11-22 at 0.51.41.png)<div style="font-size:0.8rem"><i>図８：図形を何も描画しない状態．</i></div> | ![](./screenshot/Screenshot 2022-11-22 at 0.51.45.png)<div style="font-size:0.8rem"><i>図９：図形を３つ描画．</i></div> |
 |                                                              |                                                              |
 
 図８，図９のように，`ObjectCount`の数値が描画されている図形に応じて変わった．
@@ -518,7 +518,7 @@ public class Figure extends Coord {
 
 |                                                              |                                                              |
 | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.58.56.png)<div style="font-size:0.8rem"><i>図１０：図形を複数個描画した．</i></div> | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.59.01.png)<div style="font-size:0.8rem"><i>図１１：\[Clear]を押した．</i></div> |
+| ![](./screenshot/Screenshot 2022-11-22 at 0.58.56.png)<div style="font-size:0.8rem"><i>図１０：図形を複数個描画した．</i></div> | ![](./screenshot/Screenshot 2022-11-22 at 0.59.01.png)<div style="font-size:0.8rem"><i>図１１：\[Clear]を押した．</i></div> |
 |                                                              |                                                              |
 
 図１０，図１１のように，\[Clear]を押すことで描画されている図形を削除できた．
@@ -529,7 +529,7 @@ public class Figure extends Coord {
 
 |                                                              |                                                              |
 | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.02.24.png)<div style="font-size:0.8rem"><i>図１２：最大描画数を`15`に設定し，図形を15個描画．</i></div> | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.02.29.png)<div style="font-size:0.8rem"><i>図１３：同設定で図形を16個描画．</i></div> |
+| ![](./screenshot/Screenshot 2022-11-22 at 1.02.24.png)<div style="font-size:0.8rem"><i>図１２：最大描画数を`15`に設定し，図形を15個描画．</i></div> | ![](./screenshot/Screenshot 2022-11-22 at 1.02.29.png)<div style="font-size:0.8rem"><i>図１３：同設定で図形を16個描画．</i></div> |
 |                                                              |                                                              |
 
 図１２，図１３のように，`MaxObjectCount`で指定した描画数を超えて描画されることはない．
@@ -540,8 +540,8 @@ public class Figure extends Coord {
 
 |                                                              |                                                              |
 | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.07.15.png)<div style="font-size:0.8rem"><i>図１４：大きさ50pxで実行．</i></div> | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.07.25.png)<div style="font-size:0.8rem"><i>図１５：大きさ20pxで実行．</i></div> |
-| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.07.39.png)<div style="font-size:0.8rem"><i>図１６：大きさ80pxで実行．</i></div> | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.07.48.png)<div style="font-size:0.8rem"><i>図１７：大きさ0pxで実行．</i></div> |
+| ![](./screenshot/Screenshot 2022-11-22 at 1.07.15.png)<div style="font-size:0.8rem"><i>図１４：大きさ50pxで実行．</i></div> | ![](./screenshot/Screenshot 2022-11-22 at 1.07.25.png)<div style="font-size:0.8rem"><i>図１５：大きさ20pxで実行．</i></div> |
+| ![](./screenshot/Screenshot 2022-11-22 at 1.07.39.png)<div style="font-size:0.8rem"><i>図１６：大きさ80pxで実行．</i></div> | ![](./screenshot/Screenshot 2022-11-22 at 1.07.48.png)<div style="font-size:0.8rem"><i>図１７：大きさ0pxで実行．</i></div> |
 |                                                              |                                                              |
 
 図１４，図１５，図１６，図１７のように，指定した大きさで図形が描画される．また，0pxでは図形は何も描画されない．
@@ -552,8 +552,8 @@ public class Figure extends Coord {
 
 | | |
 | :---: | :---: |
-| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 0.46.49.png)<div style="font-size:0.8rem"><i>図１８：\[Rectangle]を選択し図形を描画．</i></div> | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.43.04.png)<div style="font-size:0.8rem"><i>図１９：\[Change Size]で図形を６個描画->10pxで６個描画</i></div> |
-| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-22 at 1.43.49.png)<div style="font-size:0.8rem"><i>図２０：Rを`255`に設定し，大きさを50px->0px->Change Sizeと変更し描画．</i></div> | |
+| ![](./screenshot/Screenshot 2022-11-22 at 0.46.49.png)<div style="font-size:0.8rem"><i>図１８：\[Rectangle]を選択し図形を描画．</i></div> | ![](./screenshot/Screenshot 2022-11-22 at 1.43.04.png)<div style="font-size:0.8rem"><i>図１９：\[Change Size]で図形を６個描画->10pxで６個描画</i></div> |
+| ![](./screenshot/Screenshot 2022-11-22 at 1.43.49.png)<div style="font-size:0.8rem"><i>図２０：Rを`255`に設定し，大きさを50px->0px->Change Sizeと変更し描画．</i></div> | |
 | | |
 
 図１８のように，\[Rectangle]を選択することで四角形を描画できた．
