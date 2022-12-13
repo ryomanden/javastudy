@@ -60,7 +60,7 @@ class toolbar extends JFrame implements MouseListener, ActionListener {
 
         TitledBorder colorBorder = new TitledBorder("Color");
         JPanel panel3 = new JPanel();
-        panel3.setPreferredSize(new Dimension(180, 100));
+        panel3.setPreferredSize(new Dimension(180, 90));
         panel3.setBorder(colorBorder);
         add(panel3);
 
