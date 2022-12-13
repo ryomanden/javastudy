@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class PaintReport extends Frame implements MouseListener, MouseMotionListener, ComponentListener, KeyListener {
+
+    // 変数，配列などの宣言 //
     static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     static int width = screenSize.width, height = screenSize.height;
     static toolbar toolbar = null;
@@ -19,6 +21,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
     report2.Figure obj;
     Label statusLabel = new Label("Wait...");
 
+    // コンストラクタ //
     PaintReport() {
         objList = new ArrayList<>();
         addMouseListener(this);
@@ -34,6 +37,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
         add(statusPanel, BorderLayout.SOUTH);
     }
 
+    // メインメソッド //
     public static void main(String[] args) {
         f.setBounds(width / 4, height / 4, 640, 480);
         f.setTitle("Main Window");
@@ -50,6 +54,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
         toolbar.setBounds(width / 4 + 645, height / 4, 200, 480);
     }
 
+    // アプリケーションの終了を行うメソッド //
     public static void quit() {
         switch (JOptionPane.showConfirmDialog(f, "Save before exiting?")) {
             case JOptionPane.YES_OPTION:
@@ -64,6 +69,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
         }
     }
 
+    // Undoを行うメソッド //
     void undo() {
         if (undo < objList.size()) {// <---undo
             undo += 1;
@@ -72,6 +78,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
         }
     }
 
+    // Redoを行うメソッド //
     void redo() {
         if (undo > 0) {
             undo -= 1;
@@ -80,6 +87,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
         }
     }
 
+    // 描画されている図形を削除するメソッド //
     public void clear() {
         objList.clear();
         undo = 0;
@@ -89,6 +97,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
         repaint();
     }
 
+    // ファイルを保存するメソッド //
     public void save(String fname) {
         try {
             FileOutputStream fos = new FileOutputStream(fname);
@@ -105,6 +114,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
         repaint();
     }
 
+    // ファイルの読み込みを行うメソッド //
     @SuppressWarnings("unchecked")
     public void load(String fname) {
         try {
@@ -123,30 +133,33 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
         repaint();
     }
 
-
+    // 画面に図形を描画するメソッド //
     @Override public void paint(Graphics g) {
         report2.Figure f;
         for (int i = 0; i < (objList.size() - undo); i++) {
             f = objList.get(i);
             f.paint(g);
         }
-        if (toolbar != null) {
+        if (toolbar != null) {//ツールバーが表示されるまで処理を行わない様にする
             toolbar.setUndo(0 < objList.size() && undo < objList.size());
             toolbar.setRedo(undo > 0);
             if (mode >= 1) obj.paint(g);
         }
     }
 
+    // メインウィンドウでクリックイベントが発生した際の処理 //
     @Override public void mousePressed(MouseEvent e) {
         x = e.getX();
         y = e.getY();
 
+        // Undoを押した後に画面がクリックされた場合，Undoした分のオブジェクトを削除する //
         if (undo != 0) {// <---undo delete
             for (; undo > 0; undo--) {
                 objList.remove(objList.size() - 1);
             }
         }
 
+        // ツールバーで選択されている図形モードを確認し，選択に応じた図形を生成する //
         switch (toolbar.getObjMode()) {
             case "dott":
                 isDrawing = false;
@@ -184,6 +197,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
         }
     }
 
+    // マウスのクリックが解除された際の処理 //
     @Override public void mouseReleased(MouseEvent e) {
         x = e.getX();
         y = e.getY();
@@ -202,6 +216,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
     @Override public void mouseEntered(MouseEvent e) {}
     @Override public void mouseExited(MouseEvent e) {}
 
+    // マウスがクリック状態で移動している際の処理 //
     @Override public void mouseDragged(MouseEvent e) {
         x = e.getX();
         y = e.getY();
@@ -214,10 +229,13 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
         obj.setPerfect(isShift);
         repaint();
     }
+
+    // マウスカーソルを動かしている際の処理 //
     @Override public void mouseMoved(MouseEvent e) {
         x = e.getX();
         y = e.getY();
 
+        // 線描画モードで，線とカーソルとの間にプレビュー線を引くための処理 //
         if (isDrawing && Objects.equals(toolbar.getObjMode(), "line")) {
             obj = new Line(objList.get(objList.size() - 1 - undo), new Coord(x,y), toolbar.getColor());
             obj.moveto(x, y);
@@ -225,11 +243,15 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
             repaint();
         }
     }
+
+    // メインウィンドウがリサイズされた際の処理 //
     @Override public void componentResized(ComponentEvent e) {
         if (toolbar != null) {
             toolbar.setLocation(getX() + getWidth() + 10, getY());
         }
     }
+
+    // メインウィンドウが移動された際の処理 //
     @Override public void componentMoved(ComponentEvent e) {
         if (toolbar != null) {
             toolbar.setLocation(getX() + getWidth() + 10, getY());
@@ -238,7 +260,11 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
     @Override public void componentShown(ComponentEvent e) {}
     @Override public void componentHidden(ComponentEvent e) {}
     @Override public void keyTyped(KeyEvent e) {}
+
+    // キーボードのキーが押された際の処理 //
     @Override public void keyPressed(KeyEvent e) {
+
+        // 押されたキーに応じて処理を行う //
         switch (e.getKeyCode()) {
             case KeyEvent.VK_SHIFT:
                 isShift = true;
@@ -254,7 +280,11 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
                 break;
         }
     }
+
+    // キーボードのキーが離された際の処理 //
     @Override public void keyReleased(KeyEvent e) {
+
+        // 離されたキーに応じて処理を行う //
         switch (e.getKeyCode()) {
             case KeyEvent.VK_SHIFT:
                 isShift = false;
@@ -268,10 +298,13 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
     }
 
     // setter & getter //
+
+    // ステータスバーの内容を設定するセッター //
     public void setStatus(String status) {
         statusLabel.setText(status);
     }
 
+    // メインウィンドウ内のカーソルを設定するセッター //
     public void setCursor_this(int Cursor) {
         f.setCursor(new Cursor(Cursor));
     }
