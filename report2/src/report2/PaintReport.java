@@ -13,9 +13,9 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
     static toolbar toolbar = null;
     static PaintReport f = new PaintReport();
     int x, y;
+    int mode = 0, undo = 0;
     boolean isShift = false, isEnter = false, isDrawing = false;
     ArrayList<report2.Figure> objList;
-    int mode = 0, undo = 0;
     report2.Figure obj;
     Label statusLabel = new Label("Wait...");
 
@@ -23,10 +23,10 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
         objList = new ArrayList<>();
         addMouseListener(this);
         addMouseMotionListener(this);
-        addComponentListener(this);//ウィンドウのサイズ変更を見る
+        addComponentListener(this);//ウィンドウのサイズ変更を取得する
         addKeyListener(this);
         setLayout(new BorderLayout());
-        setCursor(new Cursor(Cursor.WAIT_CURSOR));
+        setCursor(new Cursor(Cursor.WAIT_CURSOR));//起動直後，カーソルを読み込み状態に変更する
         Panel statusPanel = new Panel();
         statusPanel.add(statusLabel);
         statusPanel.setLayout(new GridLayout());
@@ -47,8 +47,6 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 
         toolbar = new toolbar(f);
 
-
-        //if(args .length == 1) f.load(args[0]);
         toolbar.setBounds(width / 4 + 645, height / 4, 200, 480);
     }
 
@@ -85,6 +83,8 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
     public void clear() {
         objList.clear();
         undo = 0;
+        obj = null;
+        mode = 0;
         isDrawing = false;
         repaint();
     }
@@ -124,8 +124,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
     }
 
 
-    @Override
-    public void paint(Graphics g) {
+    @Override public void paint(Graphics g) {
         report2.Figure f;
         for (int i = 0; i < (objList.size() - undo); i++) {
             f = objList.get(i);
@@ -138,8 +137,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
         }
     }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
+    @Override public void mousePressed(MouseEvent e) {
         x = e.getX();
         y = e.getY();
 
@@ -186,8 +184,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
         }
     }
 
-    @Override
-    public void mouseReleased(MouseEvent e) {
+    @Override public void mouseReleased(MouseEvent e) {
         x = e.getX();
         y = e.getY();
         if (mode == 1) obj.moveto(x, y);
@@ -227,10 +224,6 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
             mode = 1;
             repaint();
         }
-        //if (isDrawing && Objects.equals(toolbar.getObjMode(), "line")) {
-        //    obj.moveto(x, y);
-        //    repaint();
-        //}
     }
     @Override public void componentResized(ComponentEvent e) {
         if (toolbar != null) {
