@@ -479,7 +479,7 @@ public class Figure extends Coord {
 
 |  | |
 | :---: | :---: |
-| ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-21 at 23.53.41.png)  <div style="font-size:0.8rem"><i>図１：図形を３０個描画．</i></div> | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-21 at 23.53.47.png)<div style="font-size:0.8rem"><i>図２：図形を３１個描画．</i></div> |
+| ![](./screenshot/Screenshot 2022-11-21 at 23.53.41.png)  <div style="font-size:0.8rem"><i>図１：図形を３０個描画．</i></div> | ![](/Users/ryo_mitsuda/Documents/github/javastudy/screenshot/Screenshot 2022-11-21 at 23.53.47.png)<div style="font-size:0.8rem"><i>図２：図形を３１個描画．</i></div> |
 |  |  |
 
 図１，図２のように，値に変更を加えず実行した場合には３０個を超えて図形が描画されることはない．
