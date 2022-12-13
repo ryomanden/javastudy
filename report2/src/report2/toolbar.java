@@ -4,14 +4,14 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-class toolbar extends JFrame implements MouseListener, ActionListener {
+class toolbar extends JFrame implements ActionListener {
 
-    PaintReport paintReport = null;
+    PaintReport paintReport;
     MenuIconBtn fillButton = new MenuIconBtn("\uf5c7", "fill", "Object fill ON/OFF");
     MenuIconBtn undoButton = new MenuIconBtn("\uf3e5", "undo", "Return to previous step");
     MenuIconBtn redoButton = new MenuIconBtn("\uf064", "redo", "Return to next step");
@@ -21,14 +21,11 @@ class toolbar extends JFrame implements MouseListener, ActionListener {
     private Color selectColor = Color.black;
     private boolean fillStatus = false;
 
-    public static void main() {}
-
     public toolbar(PaintReport paintReport) {
         this.paintReport = paintReport;
         getContentPane().setLayout(new FlowLayout());
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setTitle("Toolbar");
-        addMouseListener(this);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -123,6 +120,7 @@ class toolbar extends JFrame implements MouseListener, ActionListener {
         nowColor.setFont(new Font("Font Awesome 6 Free", Font.PLAIN, 15));
         panel3.add(nowColor);
 
+        paintReport.setCursor_this(Cursor.DEFAULT_CURSOR);
         paintReport.setStatus("Ready.");
     }
 
@@ -163,7 +161,7 @@ class toolbar extends JFrame implements MouseListener, ActionListener {
                 break;
 
             case "load":
-                if (file.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                if (file.showOpenDialog(paintReport) == JFileChooser.APPROVE_OPTION) {
                     paintReport.load(file.getSelectedFile().getPath());
                     paintReport.setStatus(file.getSelectedFile().getPath());
                 } else {
@@ -180,7 +178,7 @@ class toolbar extends JFrame implements MouseListener, ActionListener {
                 break;
 
             case "dott":
-                paintReport.setCursor(Cursor.DEFAULT_CURSOR);
+                paintReport.setCursor_this(Cursor.DEFAULT_CURSOR);
                 break;
 
             case "circle":
@@ -188,7 +186,7 @@ class toolbar extends JFrame implements MouseListener, ActionListener {
             case "rect":
 
             case "line":
-                paintReport.setCursor(Cursor.CROSSHAIR_CURSOR);
+                paintReport.setCursor_this(Cursor.CROSSHAIR_CURSOR);
                 break;
 
             default:
@@ -198,18 +196,12 @@ class toolbar extends JFrame implements MouseListener, ActionListener {
     }
 
     public void saveDialog() {
-        if (file.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+        if (file.showSaveDialog(paintReport) == JFileChooser.APPROVE_OPTION) {
             paintReport.save(file.getSelectedFile().getPath());
         } else {
             paintReport.setStatus("canceled or error");
         }
     }
-
-    @Override public void mouseClicked(MouseEvent e) {}
-    @Override public void mousePressed(MouseEvent e) {}
-    @Override public void mouseReleased(MouseEvent e) {}
-    @Override public void mouseEntered(MouseEvent e) {}
-    @Override public void mouseExited(MouseEvent e) {}
 
     // getter & setter //
     public String getObjMode() {

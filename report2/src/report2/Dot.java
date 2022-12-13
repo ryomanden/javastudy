@@ -5,11 +5,6 @@ import java.awt.*;
 public class Dot extends Figure {
     int size;
 
-    Dot(Color color) {
-        this.color = color;
-        size = 10;
-    }
-
     Dot(Color color, Boolean fs) {
         this.color = color;
         this.fillStatus = fs;

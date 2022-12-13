@@ -5,11 +5,11 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class PaintReport extends Frame implements MouseListener, MouseMotionListener, ComponentListener, KeyListener {
     static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    static int width = screenSize.width;
-    static int height = screenSize.height;
+    static int width = screenSize.width, height = screenSize.height;
     static toolbar toolbar = null;
     static PaintReport f = new PaintReport();
     int x, y;
@@ -17,11 +17,26 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
     ArrayList<report2.Figure> objList;
     int mode = 0, undo = 0;
     report2.Figure obj;
-    Label statusLabel = new Label("Loading...");
+    Label statusLabel = new Label("Wait...");
+
+    PaintReport() {
+        objList = new ArrayList<>();
+        addMouseListener(this);
+        addMouseMotionListener(this);
+        addComponentListener(this);//ウィンドウのサイズ変更を見る
+        addKeyListener(this);
+        setLayout(new BorderLayout());
+        setCursor(new Cursor(Cursor.WAIT_CURSOR));
+        Panel statusPanel = new Panel();
+        statusPanel.add(statusLabel);
+        statusPanel.setLayout(new GridLayout());
+        statusPanel.setBackground(Color.LIGHT_GRAY);
+        add(statusPanel, BorderLayout.SOUTH);
+    }
 
     public static void main(String[] args) {
         f.setBounds(width / 4, height / 4, 640, 480);
-        f.setTitle("Paint Sample");
+        f.setTitle("Main Window");
         f.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -37,18 +52,18 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
         toolbar.setBounds(width / 4 + 645, height / 4, 200, 480);
     }
 
-    PaintReport() {
-        objList = new ArrayList<report2.Figure>();
-        addMouseListener(this);
-        addMouseMotionListener(this);
-        addComponentListener(this);//ウィンドウのサイズ変更を見る
-        addKeyListener(this);
-        setLayout(new BorderLayout());
-        Panel statusPanel = new Panel();
-        statusPanel.add(statusLabel);
-        statusPanel.setLayout(new GridLayout());
-        statusPanel.setBackground(Color.LIGHT_GRAY);
-        add(statusPanel, BorderLayout.SOUTH);
+    public static void quit() {
+        switch (JOptionPane.showConfirmDialog(f, "Save before exiting?")) {
+            case JOptionPane.YES_OPTION:
+                toolbar.saveDialog();
+                break;
+            case JOptionPane.NO_OPTION:
+                System.exit(0);
+                break;
+            case JOptionPane.CANCEL_OPTION:
+            default:
+                break;
+        }
     }
 
     void undo() {
@@ -90,20 +105,6 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
         repaint();
     }
 
-    public static void quit(){
-        switch (JOptionPane.showConfirmDialog(null, "Save before exiting?")) {
-            case JOptionPane.YES_OPTION:
-                toolbar.saveDialog();
-                break;
-            case JOptionPane.NO_OPTION:
-                System.exit(0);
-                break;
-            case JOptionPane.CANCEL_OPTION:
-            default:
-                break;
-        }
-    }
-
     @SuppressWarnings("unchecked")
     public void load(String fname) {
         try {
@@ -131,10 +132,10 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
             f.paint(g);
         }
         if (toolbar != null) {
-			toolbar.setUndo(0 < objList.size() && undo < objList.size());
-			toolbar.setRedo(undo > 0);
+            toolbar.setUndo(0 < objList.size() && undo < objList.size());
+            toolbar.setRedo(undo > 0);
+            if (mode >= 1) obj.paint(g);
         }
-        if (mode >= 1) obj.paint(g);
     }
 
     @Override
@@ -150,16 +151,19 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 
         switch (toolbar.getObjMode()) {
             case "dott":
+                isDrawing = false;
                 mode = 1;
                 obj = new Dot(toolbar.getColor(), toolbar.getFillStatus());
                 break;
 
             case "circle":
+                isDrawing = false;
                 mode = 2;
                 obj = new report2.Circle(toolbar.getColor(), toolbar.getFillStatus());
                 break;
 
             case "rect":
+                isDrawing = false;
                 mode = 2;
                 obj = new Rect(toolbar.getColor(), toolbar.getFillStatus());
                 break;
@@ -167,7 +171,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
             case "line":
                 mode = 2;
                 if (!isDrawing) {
-                    obj = new Line(new Coord(x, y), toolbar.getColor());
+                    obj = new Line(new Coord(x, y), new Coord(x, y), toolbar.getColor());
                     isDrawing = true;
                 }
                 break;
@@ -193,11 +197,6 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
             obj = null;
         }
         mode = 0;
-        if (isDrawing) {
-            obj = new Line(objList.get(objList.size() - 1), toolbar.getColor());
-            obj.moveto(x, y);
-            mode = 1;
-        }
         repaint();
     }
 
@@ -205,6 +204,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
     @Override public void mouseClicked(MouseEvent e) {}
     @Override public void mouseEntered(MouseEvent e) {}
     @Override public void mouseExited(MouseEvent e) {}
+
     @Override public void mouseDragged(MouseEvent e) {
         x = e.getX();
         y = e.getY();
@@ -220,10 +220,17 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
     @Override public void mouseMoved(MouseEvent e) {
         x = e.getX();
         y = e.getY();
-        if (isDrawing) {
+
+        if (isDrawing && Objects.equals(toolbar.getObjMode(), "line")) {
+            obj = new Line(objList.get(objList.size() - 1 - undo), new Coord(x,y), toolbar.getColor());
             obj.moveto(x, y);
+            mode = 1;
             repaint();
         }
+        //if (isDrawing && Objects.equals(toolbar.getObjMode(), "line")) {
+        //    obj.moveto(x, y);
+        //    repaint();
+        //}
     }
     @Override public void componentResized(ComponentEvent e) {
         if (toolbar != null) {
@@ -267,11 +274,16 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
         }
     }
 
-	// setter & getter //
+    // setter & getter //
     public void setStatus(String status) {
         statusLabel.setText(status);
     }
-    public void setCursor(int Cursor) {
+
+    public void setCursor_this(int Cursor) {
         f.setCursor(new Cursor(Cursor));
+    }
+
+    public boolean isShift() {
+        return isShift;
     }
 }

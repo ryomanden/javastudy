@@ -5,10 +5,6 @@ import java.awt.*;
 public class Rect extends report2.Figure {
     int X, Y, W, H, Width, Height;
 
-    Rect(Color color) {
-        this.color = color;
-    }
-
     Rect(Color color, Boolean fs) {
         this.color = color;
         this.fillStatus = fs;

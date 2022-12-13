@@ -5,10 +5,6 @@ import java.awt.*;
 public class Circle extends Figure {
     int width, height;
 
-    Circle(Color color) {
-        this.color = color;
-    }
-
     Circle(Color color, Boolean fs) {
         this.color = color;
         this.fillStatus = fs;

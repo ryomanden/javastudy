@@ -5,7 +5,7 @@ import java.awt.*;
 public class Line extends Figure { //Figureクラスを継承し，Lineクラスを作成する．
     Coord sPoint, ePoint;
 
-    Line(Coord sPoint, Color color) {
+    Line(Coord sPoint, Coord ePoint, Color color) {
         this.color = color;
         this.sPoint = sPoint;
     }
