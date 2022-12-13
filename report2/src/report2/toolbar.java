@@ -158,10 +158,12 @@ class toolbar extends JFrame implements ActionListener {
 
             case "clear":
                 paintReport.clear();
+                paintReport.setStatus("Cleared all objects");
                 break;
 
             case "load":
                 if (file.showOpenDialog(paintReport) == JFileChooser.APPROVE_OPTION) {
+                    paintReport.clear();
                     paintReport.load(file.getSelectedFile().getPath());
                     paintReport.setStatus(file.getSelectedFile().getPath());
                 } else {
@@ -182,9 +184,7 @@ class toolbar extends JFrame implements ActionListener {
                 break;
 
             case "circle":
-
             case "rect":
-
             case "line":
                 paintReport.setCursor_this(Cursor.CROSSHAIR_CURSOR);
                 break;
