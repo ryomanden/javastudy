@@ -15,6 +15,7 @@ class toolbar extends JFrame implements MouseListener, ActionListener {
     MenuIconBtn fillButton = new MenuIconBtn("\uf5c7", "fill", "Object fill ON/OFF");
     MenuIconBtn undoButton = new MenuIconBtn("\uf3e5", "undo", "Return to previous step");
     MenuIconBtn redoButton = new MenuIconBtn("\uf064", "redo", "Return to next step");
+    JLabel nowColor = new JLabel("\uf0c8");
     private final ButtonGroup objModeGroup = new ButtonGroup();
     private final JFileChooser file = new JFileChooser(".");
     private Color selectColor = Color.black;
@@ -60,7 +61,7 @@ class toolbar extends JFrame implements MouseListener, ActionListener {
 
         TitledBorder colorBorder = new TitledBorder("Color");
         JPanel panel3 = new JPanel();
-        panel3.setPreferredSize(new Dimension(180, 90));
+        panel3.setPreferredSize(new Dimension(180, 110));
         panel3.setBorder(colorBorder);
         add(panel3);
 
@@ -109,6 +110,13 @@ class toolbar extends JFrame implements MouseListener, ActionListener {
         fillButton.setPreferredSize(new Dimension(50, 50));
         panel3.add(fillButton);
 
+        JLabel nowColorTitle = new JLabel("Selected color : ");
+        panel3.add(nowColorTitle);
+
+        nowColor.setForeground(getColor());
+        nowColor.setFont(new Font("Font Awesome 6 Free", Font.PLAIN, 15));
+        panel3.add(nowColor);
+
         paintReport.setStatus("Ready.");
     }
 
@@ -126,6 +134,10 @@ class toolbar extends JFrame implements MouseListener, ActionListener {
 
             case "color":
                 selectColor = JColorChooser.showDialog(this, "Color Selector", Color.black);
+                if(selectColor != null) {
+                    paintReport.setStatus("R:" + getColor().getRed() + "  G:" +  getColor().getGreen() + "  B:" + getColor().getBlue());
+                    nowColor.setForeground(getColor());
+                }
                 break;
 
             case "fill":
