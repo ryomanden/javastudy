@@ -45,6 +45,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
         setLayout(new BorderLayout());
         Panel statusPanel = new Panel();
         statusPanel.add(statusLabel);
+        statusPanel.setLayout(new GridLayout());
         statusPanel.setBackground(Color.LIGHT_GRAY);
         add(statusPanel, BorderLayout.SOUTH);
     }
@@ -52,7 +53,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
     void undo() {
         if (undo < objList.size()) {// <---undo
             undo += 1;
-            setStatus("undo" + undo);//debug
+            setStatus("Undo : " + undo);//status
             repaint();
         }
     }
@@ -60,7 +61,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
     void redo() {
         if (undo > 0) {
             undo -= 1;
-            setStatus("redo" + undo);//debug
+            setStatus("Undo : " + undo);//status
             repaint();
         }
     }
@@ -79,7 +80,10 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
             oos.writeObject(objList);
             oos.close();
             fos.close();
+            setStatus("file saved.");//status
+            fos.close();
         } catch (IOException e) {
+            setStatus("ERROR : failed to save.");//status
         }
         setStatus("saved");//debug
         repaint();
@@ -93,8 +97,11 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
             objList = (ArrayList<report2.Figure>) ois.readObject();
             ois.close();
             fis.close();
+            setStatus("loaded");//status
         } catch (IOException e) {
+            setStatus("ERROR : failed to load.");//status
         } catch (ClassNotFoundException e) {
+            setStatus("ERROR : class not found.");//status
         }
         setStatus("loaded");//debug
         repaint();
