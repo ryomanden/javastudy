@@ -1,5 +1,6 @@
 package report2;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -24,7 +25,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
         f.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                System.exit(0);
+                quit();
             }
         });
         f.setVisible(true);
@@ -87,6 +88,21 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
         }
         setStatus("saved");//debug
         repaint();
+    }
+
+    public static void quit(){
+        int ans = JOptionPane.showConfirmDialog(null, "Save before exiting?");
+        switch (ans) {
+            case JOptionPane.YES_OPTION:
+                toolbar.saveDialog();
+                break;
+            case JOptionPane.NO_OPTION:
+                System.exit(0);
+                break;
+            case JOptionPane.CANCEL_OPTION:
+            default:
+                break;
+        }
     }
 
     @SuppressWarnings("unchecked")

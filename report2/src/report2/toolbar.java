@@ -26,9 +26,15 @@ class toolbar extends JFrame implements MouseListener, ActionListener {
     public toolbar(PaintReport paintReport) {
         this.paintReport = paintReport;
         getContentPane().setLayout(new FlowLayout());
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setTitle("Toolbar");
         addMouseListener(this);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                PaintReport.quit();
+            }
+        });
 
         file.setFileFilter(new FileNameExtensionFilter("PaintData(*.dat)", "dat"));
 
@@ -166,15 +172,11 @@ class toolbar extends JFrame implements MouseListener, ActionListener {
                 break;
 
             case "save":
-                if (file.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-                    paintReport.save(file.getSelectedFile().getPath());
-                } else {
-                    paintReport.setStatus("canceled or error");
-                }
+                saveDialog();
                 break;
 
             case "close":
-                System.exit(0);
+                PaintReport.quit();
                 break;
 
             case "dott":
@@ -192,6 +194,14 @@ class toolbar extends JFrame implements MouseListener, ActionListener {
             default:
                 paintReport.setStatus("not-set ActionCommand");
                 break;
+        }
+    }
+
+    public void saveDialog() {
+        if (file.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+            paintReport.save(file.getSelectedFile().getPath());
+        } else {
+            paintReport.setStatus("canceled or error");
         }
     }
 
