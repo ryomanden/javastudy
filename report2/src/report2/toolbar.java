@@ -101,7 +101,7 @@ class toolbar extends JFrame implements MouseListener, ActionListener {
         closeButton.addActionListener(this);
         panel2.add(closeButton);
 
-        MenuIconBtn colorButton = new MenuIconBtn("\uf53f", "color", "Select object color");
+        MenuIconBtn colorButton = new MenuIconBtn("\uf5c3", "color", "Select object color");
         colorButton.addActionListener(this);
         colorButton.setPreferredSize(new Dimension(50, 50));
         panel3.add(colorButton);
