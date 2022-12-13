@@ -16,7 +16,7 @@ public class Rect extends report2.Figure {
 
     @Override public void paint(Graphics g) {
         g.setColor(color);
-        if (isPerfect) {
+        if (isPerfect) { //正方形へ切り替え
             if (Math.abs(w) > Math.abs(h)) {
                 W = w;
                 H = w;
@@ -24,7 +24,7 @@ public class Rect extends report2.Figure {
                 W = h;
                 H = h;
             }
-        } else {
+        } else { //長方形へ切り替え
             W = w;
             H = h;
         }
