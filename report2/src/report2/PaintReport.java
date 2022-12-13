@@ -91,8 +91,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
     }
 
     public static void quit(){
-        int ans = JOptionPane.showConfirmDialog(null, "Save before exiting?");
-        switch (ans) {
+        switch (JOptionPane.showConfirmDialog(null, "Save before exiting?")) {
             case JOptionPane.YES_OPTION:
                 toolbar.saveDialog();
                 break;
