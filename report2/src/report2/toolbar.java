@@ -168,11 +168,11 @@ class toolbar extends JFrame implements ActionListener {
                 if (fillStatus) {
                     fillButton.setText("\uf5c7");
                     fillStatus = !fillStatus;
-                    paintReport.setStatus("False");
+                    paintReport.setStatus("Fill : false");
                 } else {
                     fillButton.setText("\uf043");
                     fillStatus = !fillStatus;
-                    paintReport.setStatus("True");
+                    paintReport.setStatus("Fill : true");
                 }
                 break;
 
@@ -219,6 +219,7 @@ class toolbar extends JFrame implements ActionListener {
     public void saveDialog() {
         if (file.showSaveDialog(paintReport) == JFileChooser.APPROVE_OPTION) {
             paintReport.save(file.getSelectedFile().getPath());
+            paintReport.setStatus(file.getSelectedFile().getPath());
         } else {
             paintReport.setStatus("canceled or error");
         }
@@ -226,17 +227,17 @@ class toolbar extends JFrame implements ActionListener {
 
     // getter & setter //
 
-    // 選択されている図形モードを受け取れるゲッター //
+    // 選択されている図形モードを返すゲッター //
     public String getObjMode() {
         return objModeGroup.getSelection().getActionCommand();
     }
 
-    // 塗りつぶしがオンになっているか受け取れるゲッター //
+    // 塗りつぶしがオンになっているか返すゲッター //
     public Boolean getFillStatus() {
         return this.fillStatus;
     }
 
-    // 指定された色を受け取れるゲッター //
+    // 指定された色を返すゲッター //
     public Color getColor() {
         return this.selectColor;
     }
