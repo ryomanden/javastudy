@@ -297,7 +297,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
         }
     }
 
-    // setter & getter //
+    // <--- getter & setter ---> //
 
     // ステータスバーの内容を設定するセッター //
     public void setStatus(String status) {

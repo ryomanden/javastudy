@@ -225,7 +225,7 @@ class toolbar extends JFrame implements ActionListener {
         }
     }
 
-    // getter & setter //
+    // <--- getter & setter ---> //
 
     // 選択されている図形モードを返すゲッター //
     public String getObjMode() {
