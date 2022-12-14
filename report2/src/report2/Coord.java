@@ -3,10 +3,12 @@ package report2;
 import java.io.Serializable;
 
 public class Coord implements Serializable {
-    int x, y;
 
+    // 変数の宣言 //
+    int x, y;
     Coord() {x = y = 0;}
 
+    // コンストラクタ //
     Coord(int x, int y) {
         this.x = x;
         this.y = y;
