@@ -180,7 +180,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
             case "line":
                 mode = 2;
                 if (!isDrawing) {
-                    obj = new Line(new Coord(x, y), new Coord(x, y), toolbar.getColor());
+                    obj = new Line(new Coord(x, y), toolbar.getColor());
                     isDrawing = true;
                 }
                 break;
@@ -235,7 +235,7 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
 
         // 線描画モードで，線とカーソルとの間にプレビュー線を引くための処理 //
         if (isDrawing && Objects.equals(toolbar.getObjMode(), "line")) {
-            obj = new Line(objList.get(objList.size() - 1 - undo), new Coord(x,y), toolbar.getColor());
+            obj = new Line(objList.get(objList.size() - 1 - undo), toolbar.getColor());
             obj.moveto(x, y);
             mode = 1;
             repaint();
