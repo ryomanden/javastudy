@@ -28,8 +28,8 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
         addMouseMotionListener(this);
         addComponentListener(this);//ウィンドウのサイズ変更を取得する
         addKeyListener(this);
-        setLayout(new BorderLayout());
         setCursor(new Cursor(Cursor.WAIT_CURSOR));//起動直後，カーソルを読み込み状態に変更する
+        setLayout(new BorderLayout());
         Panel statusPanel = new Panel();
         statusPanel.add(statusLabel);
         statusPanel.setLayout(new GridLayout());
@@ -110,7 +110,6 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
         } catch (IOException e) {
             setStatus("ERROR : failed to save.");//status
         }
-        setStatus("saved");//debug
         repaint();
     }
 
@@ -129,7 +128,6 @@ public class PaintReport extends Frame implements MouseListener, MouseMotionList
         } catch (ClassNotFoundException e) {
             setStatus("ERROR : class not found.");//status
         }
-        setStatus("loaded");//debug
         repaint();
     }
 
